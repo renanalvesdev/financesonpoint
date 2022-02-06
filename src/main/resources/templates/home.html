@@ -1,0 +1,52 @@
+<html>
+<head th:replace="~{base::head}">
+
+</head>
+
+<body>
+	<div th:replace="~{base :: logo}" />
+	<div class="container">
+		<div th:replace="~{base::titulo('Operações')}"></div>
+		
+		<div class="container-fluid">
+			<select class="form-select " aria-label=".form-select-lg example">
+			  <option selected>Open this select menu</option>
+			  <option value="1">One</option>
+			  <option value="2">Two</option>
+			  <option value="3">Three</option>
+			</select>
+		</div>
+
+		<a href="/operacao/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+		
+		<div class="card mb-3" th:each="operacao : ${operacoes}">
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-sm-8 mb-3">
+						<div class="row ">
+							<div class="col-md-5">
+								Valor: <span th:if="${operacao.valor} != null"
+									th:text="${ 'R$ ' + operacao.valor}">200,99</span>
+							</div>
+							<div class="col-md-6">
+								Efetuada em: <span
+									th:text="${#temporals.format(operacao.data, 'dd/MM/yyyy')}">10/02/2020</span>
+									
+							</div>
+							
+						</div>
+
+						<div>Descrição:</div>
+						<div>
+							<textarea class="form-control" th:text="${operacao.descricao}" disabled>descrição do operacao</textarea>
+						</div>
+						<a th:href="@{/operacao/formulario/editar/{id}(id=${operacao.id})}">Editar</a></td>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
