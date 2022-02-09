@@ -1,0 +1,29 @@
+<html>
+<head th:replace="~{base::head}">
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="~{base::titulo('Nova Categoria')}"></div>
+
+		<div class="card mt-3">
+			<form th:object="${requisicaoNovaCategoria}" class="card-body"
+				action="/categoria/save" method="POST">
+
+				<div class="form-group">
+					<input type="hidden" th:field="*{id}" id="id" name="id">
+				</div>
+
+				<div class="form-group">
+					<label for="descricao">Descrição</label>
+					<textarea class="form-control" name="descricao"
+						th:field="*{descricao}"
+						placeholder="Exemplo: Mercantil"></textarea>
+				</div>
+
+				<button class="btn btn-primary" type="submit">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

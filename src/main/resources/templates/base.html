@@ -5,6 +5,7 @@
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<style>
 		.logo-container{
 			background-color: #47bcff;
@@ -17,13 +18,39 @@
 			font-size: 2.5rem;
 		}
 	</style>
+	
+	<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js">
+    </script>
+    
+    <!--  
+    <script>
+		$(document).ready(function(){
+			$("#valor").mask("999.999.990,00", {reverse: true})
+		})
+	</script> -->
 </head>
 
 
 <div th:fragment="logo" class="logo-container mb-3 p-3 d-flex justify-content-between">
-		<span class="logo">mudi</span>
-		<span class="mt-3">login</span>
+	<nav class="navbar navbar-expand-sm bg-light ">
+	
+	  <!-- Links -->
+	  <ul class="navbar-nav">
+	    <li class="nav-item">
+	      <a class="nav-link" href="/home">Inicio</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="/categoria/listagem">Categorias</a>
+	    </li>
+	    <li class="nav-item">
+	      <a class="nav-link" href="#">Carteiras</a>
+	    </li>
+	  </ul>
+	
+	</nav>
 </div>
+
 
 <div th:fragment="titulo(valor)" class="jumbotron mb-0">
 	<h1 class="display-4" th:text="${valor}"></h1>

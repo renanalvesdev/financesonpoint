@@ -1,5 +1,7 @@
 <html>
-<head th:replace="~{base::head}"></head>
+<head th:replace="~{base::head}">
+
+</head>
 <body>
 	<div class="container">
 		<div th:replace="~{base::titulo('Nova Operacao')}"></div>
@@ -21,7 +23,7 @@
 
 				<div class="form-group">
 					<label for="descricao">Valor</label>
-					<input class="form-control" name="valor" th:field="*{valor}" placeholder="Digite o valor.">
+					<input class="form-control" type="text" name="valor" th:field="*{valor}" placeholder="Digite o valor.">
 				</div>
 
 				<div class="form-group">
