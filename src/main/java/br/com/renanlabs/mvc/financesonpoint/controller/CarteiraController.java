@@ -13,63 +13,58 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoNovaOperacao;
+import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoNovaCarteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
 import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraRepository;
-import br.com.renanlabs.mvc.financesonpoint.repository.OperacaoRepository;
 
 @Controller
-@RequestMapping("operacao")
-public class OperacaoController {
+@RequestMapping("carteira")
+public class CarteiraController {
 
-	@Autowired
-	private OperacaoRepository operacaoRepository;
-	
 	@Autowired
 	private CarteiraRepository carteiraRepository;
 
 	
+	@GetMapping("listagem")
+	public String listagem(Model model) {
+		List<Carteira> carteiras = carteiraRepository.findAll();
+		model.addAttribute("carteiras", carteiras);
+		return "carteira/listagem"; 
+	}
+	
+	
 	/**methods to handling showing of form**/
 	
-	//show new Operation form
 	@GetMapping("formulario")
-	public String showNewForm(RequisicaoNovaOperacao requisicao, Model model) {
-		
-		List<Carteira> carteiras = carteiraRepository.findAll();
-		
-		model.addAttribute("carteiras", carteiras);
-		
-		return "operacao/formulario";
+	public String showNewForm(RequisicaoNovaCarteira requisicao) {
+		return "carteira/formulario";
 	}
 
-	// show fetched Operation form
 	@GetMapping("/formulario/editar/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
-		Operacao operacao = operacaoRepository.findById(id)
+		Carteira carteira = carteiraRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		
-		RequisicaoNovaOperacao requisicaoNovaOperacao = new RequisicaoNovaOperacao(operacao);
-		model.addAttribute("requisicaoNovaOperacao", requisicaoNovaOperacao);
+		RequisicaoNovaCarteira requisicaoNovaCarteira = new RequisicaoNovaCarteira(carteira);
+		model.addAttribute("requisicaoNovaCarteira", requisicaoNovaCarteira);
 		
-		return "operacao/formulario";
+		return "carteira/formulario";
 	}
 
-	
-	/** methods to handling CRUD operations to entity 'Operations' **/
 	
 	//save
 	@PostMapping("save")
-	public String save(@Valid RequisicaoNovaOperacao requisicao, BindingResult result) {
+	public String save(@Valid RequisicaoNovaCarteira requisicao, BindingResult result) {
 
 		if (result.hasErrors()) {
-			return "operacao/formulario";
+			return "carteira/formulario";
 		}
 
-		Operacao operacao = requisicao.toOperacao();
-		operacaoRepository.save(operacao);
+		Carteira carteira = requisicao.toCarteira();
+		carteiraRepository.save(carteira);
 
-		return "redirect:/home";
+		return "redirect:/carteira/listagem";
 	}
 
 }

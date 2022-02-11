@@ -3,10 +3,10 @@ package br.com.renanlabs.mvc.financesonpoint.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
 import br.com.renanlabs.mvc.financesonpoint.model.TipoOperacao;
 
@@ -23,8 +23,8 @@ public class RequisicaoNovaOperacao {
 	private LocalDate data;
 	
 	private boolean efetuada ;
-	
-	private TipoOperacao tipo;
+
+	private Carteira carteira;
 	
 	public RequisicaoNovaOperacao() {
 		// TODO Auto-generated constructor stub
@@ -37,7 +37,7 @@ public class RequisicaoNovaOperacao {
 		this.valor = operacao.getValor();
 		this.data = operacao.getData();
 		this.efetuada = operacao.isEfetuada();
-		this.tipo = operacao.getTipo();
+		this.carteira = operacao.getCarteira();
 	}
 	
 	public Operacao toOperacao() {
@@ -47,8 +47,8 @@ public class RequisicaoNovaOperacao {
 		operacao.setData(data);
 		operacao.setValor(valor);
 		operacao.setEfetuada(efetuada);
-		operacao.setTipo(tipo);
-
+		operacao.setCarteira(carteira);
+		
 		return operacao;
 	}
 	
@@ -102,16 +102,15 @@ public class RequisicaoNovaOperacao {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
+
+	public Carteira getCarteira() {
+		return carteira;
+	}
+
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
+	}
 	
-
-	public TipoOperacao getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoOperacao tipo) {
-		this.tipo = tipo;
-	}
-
 	
 	
 }

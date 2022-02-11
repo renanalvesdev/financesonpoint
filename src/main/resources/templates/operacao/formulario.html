@@ -39,13 +39,14 @@
 
 				<div class="form-group">
 					<label for="tipo">Tipo:</label> 
-					<select th:field="*{tipo}" name="tipo" id="tipo" class="form-select " aria-label=".form-select-lg example">
+					<select th:field="*{carteira}" name="carteira" id="carteira" class="form-select " aria-label=".form-select-lg example">
 						<option value="">Selecione</option>
-						<option
-							th:each="tipo : ${T(br.com.renanlabs.mvc.financesonpoint.model.TipoOperacao).values()}"
-							th:value="${tipo}" th:text="${tipo}"></option>
+			            <option th:each="carteira : ${carteiras}"
+			                    th:text="${carteira.descricao}"
+			                    th:value="${carteira}">
 					</select>
 				</div>
+       			
 				<button class="btn btn-primary" type="submit">Cadastrar</button>
 			</form>
 		</div>

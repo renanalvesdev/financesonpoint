@@ -1,0 +1,36 @@
+<html>
+<head th:replace="~{base::head}">
+
+</head>
+
+<body>
+	<div th:replace="~{base :: logo}" />
+	<div class="container">
+		<div th:replace="~{base::titulo('Carteiras')}"></div>
+
+		<a href="/carteira/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+		
+		<div class="card mb-3" th:each="carteira : ${carteiras}">
+
+			<div class="card-body">
+				<div class="row">
+					<div class="col-12 col-sm-8 mb-3">
+						<div>Descrição:</div>
+						<div>
+							<textarea class="form-control" th:text="${carteira.descricao}" disabled></textarea>
+						</div>
+					</div>
+					
+					<div class="row ">
+						<div class="col-md-5">
+							Valor: 
+							<span th:text="${ 'R$ ' + carteira.valor}"></span>
+						</div>
+					</div>
+				</div>
+				<a th:href="@{/carteira/formulario/editar/{id}(id=${carteira.id})}">Editar</a></td>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
