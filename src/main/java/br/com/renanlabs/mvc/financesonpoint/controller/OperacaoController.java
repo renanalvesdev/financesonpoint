@@ -1,5 +1,6 @@
 package br.com.renanlabs.mvc.financesonpoint.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -15,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoNovaOperacao;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
+import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
+import br.com.renanlabs.mvc.financesonpoint.model.TipoTransacao;
 import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraRepository;
 import br.com.renanlabs.mvc.financesonpoint.repository.OperacaoRepository;
+import br.com.renanlabs.mvc.financesonpoint.service.OperacaoService;
 
 @Controller
 @RequestMapping("operacao")
@@ -28,7 +32,9 @@ public class OperacaoController {
 	
 	@Autowired
 	private CarteiraRepository carteiraRepository;
-
+	
+	@Autowired
+	private OperacaoService operacaoService;
 	
 	/**methods to handling showing of form**/
 	
@@ -67,7 +73,7 @@ public class OperacaoController {
 		}
 
 		Operacao operacao = requisicao.toOperacao();
-		operacaoRepository.save(operacao);
+		operacaoService.save(operacao);
 
 		return "redirect:/home";
 	}

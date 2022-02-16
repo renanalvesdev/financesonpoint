@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoNovaCarteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
+import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
 import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraRepository;
+import br.com.renanlabs.mvc.financesonpoint.service.CarteiraTransacaoService;
 
 @Controller
 @RequestMapping("carteira")
@@ -24,6 +26,9 @@ public class CarteiraController {
 
 	@Autowired
 	private CarteiraRepository carteiraRepository;
+	
+	@Autowired
+	private CarteiraTransacaoService carteiraTransacaoService;
 
 	
 	@GetMapping("listagem")
@@ -46,8 +51,11 @@ public class CarteiraController {
 		Carteira carteira = carteiraRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		
+		List<CarteiraTransacao> transacoes = carteiraTransacaoService.transacoesPorCarteira(carteira);
+		
 		RequisicaoNovaCarteira requisicaoNovaCarteira = new RequisicaoNovaCarteira(carteira);
 		model.addAttribute("requisicaoNovaCarteira", requisicaoNovaCarteira);
+		model.addAttribute("transacoesCarteira", transacoes);
 		
 		return "carteira/formulario";
 	}

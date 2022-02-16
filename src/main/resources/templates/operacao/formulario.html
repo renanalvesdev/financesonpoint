@@ -4,7 +4,7 @@
 </head>
 <body>
 	<div class="container">
-		<div th:replace="~{base::titulo('Nova Operacao')}"></div>
+		<div th:replace="~{base::titulo('Despesa')}"></div>
 
 		<div class="card mt-3">
 			<form th:object="${requisicaoNovaOperacao}" class="card-body"
@@ -38,12 +38,12 @@
 				</div>
 
 				<div class="form-group">
-					<label for="tipo">Tipo:</label> 
+					<label for="tipo">Carteira :</label> 
 					<select th:field="*{carteira}" name="carteira" id="carteira" class="form-select " aria-label=".form-select-lg example">
 						<option value="">Selecione</option>
 			            <option th:each="carteira : ${carteiras}"
 			                    th:text="${carteira.descricao}"
-			                    th:value="${carteira}">
+			                    th:value="${carteira.id}">
 					</select>
 				</div>
        			

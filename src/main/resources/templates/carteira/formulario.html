@@ -28,7 +28,45 @@
 						placeholder="Valor">
 				</div>
 
+				<div>
+					
+				</div>
+
 				<button class="btn btn-primary" type="submit">Cadastrar</button>
+				
+				
+				<h6 style="text-align:center">Transações da Carteira</h6>
+				<div class="card mb-3" th:each="transacao : ${transacoesCarteira}">
+					<div class="card-body">
+						<div class="row">
+							<div class="col-md-6">
+								Tipo de Operacao: <span
+									th:text="${transacao.tipo}"></span>
+									
+							</div>
+							<div class="col-md-6">
+								Data: <span
+									th:text="${#temporals.format(transacao.data, 'dd/MM/yyyy')}"></span>
+									
+							</div>
+							
+							<div class="row ">
+								<div class="col-md-5">
+									Valor: 
+									<span th:text="${ 'R$ ' + transacao.valor}"></span>
+								</div>
+							</div>
+							
+							
+							<div class="row ">
+								<div>Debito referente a despesa de ID:
+									<span th:text="${transacao.despesa.id}" ></span>
+								</div>
+							</div>
+						
+						</div>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>

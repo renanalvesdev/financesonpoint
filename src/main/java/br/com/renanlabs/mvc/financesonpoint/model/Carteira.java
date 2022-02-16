@@ -1,10 +1,6 @@
 package br.com.renanlabs.mvc.financesonpoint.model;
 
-import java.time.LocalDate;
-
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;

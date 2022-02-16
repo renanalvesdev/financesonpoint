@@ -8,7 +8,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
-import br.com.renanlabs.mvc.financesonpoint.model.TipoOperacao;
 
 public class RequisicaoNovaOperacao {
 
