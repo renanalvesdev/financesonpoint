@@ -16,6 +16,8 @@ public class CarteiraTransacaoService {
 	private CarteiraTransacaoRepository carteiraTransacaoRepository;
 	
 	public void save(CarteiraTransacao carteiraTransacao) {
+		
+		
 		carteiraTransacaoRepository.save(carteiraTransacao);
 	}
 	
@@ -23,5 +25,8 @@ public class CarteiraTransacaoService {
 		return carteiraTransacaoRepository.findByCarteira(carteira);
 	}
 	
+	public CarteiraTransacao findById(Long id) {
+		return carteiraTransacaoRepository.findById(id).orElse(null);
+	}
 
 }

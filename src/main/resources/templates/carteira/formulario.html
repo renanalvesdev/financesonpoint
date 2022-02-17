@@ -35,7 +35,15 @@
 				<button class="btn btn-primary" type="submit">Cadastrar</button>
 				
 				
-				<h6 style="text-align:center">Transações da Carteira</h6>
+				
+			</form>
+			
+			<h6 style="text-align:center">Transações da Carteira</h6>
+				
+				<a th:href="@{/carteiraTransacao/formulario/carteira/{id}(id=${id})}">
+					<button class="btn btn-outline-secondary my-2 my-sm-0">Nova transação</button>
+				</a>
+				
 				<div class="card mb-3" th:each="transacao : ${transacoesCarteira}">
 					<div class="card-body">
 						<div class="row">
@@ -67,7 +75,6 @@
 						</div>
 					</div>
 				</div>
-			</form>
 		</div>
 	</div>
 </body>

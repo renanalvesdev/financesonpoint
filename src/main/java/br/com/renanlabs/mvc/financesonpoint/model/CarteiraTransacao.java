@@ -41,6 +41,15 @@ public class CarteiraTransacao {
 	
 	@Enumerated(EnumType.STRING)
 	private TipoTransacao tipo;	
+	
+	
+	public CarteiraTransacao() {
+		
+	}
+	
+	public CarteiraTransacao(Carteira carteira) {
+		this.carteira = carteira;
+	}
 
 	public Long getId() {
 		return id;

@@ -1,0 +1,58 @@
+<html>
+<head th:replace="~{base::head}">
+
+</head>
+<body>
+	<div class="container">
+		<div th:replace="~{base::titulo('Transação Carteira')}"></div>
+
+		<div class="card mt-3">
+			<form th:object="${requisicaoCarteiraTransacao}" class="card-body"
+				action="/carteira/save" method="POST">
+
+				<div class="form-group">
+					<input type="hidden" th:field="*{id}" id="id" name="id">
+				</div>
+
+				<div class="form-group">
+					<label for="descricao">Descrição</label>
+					<textarea class="form-control" name="descricao"
+						th:field="*{descricao}"
+						placeholder="Exemplo: Transferencia feita para carteira X com a finalidade de reforça-la"></textarea>
+				</div>
+				
+				<div class="form-group">
+					<label for="descricao">Valor</label>
+					<input class="form-control" name="valor"
+						th:field="*{valor}"
+						placeholder="Valor da transferencia: ex: 50.00">
+				</div>
+				
+				<div class="form-group">
+					<label for="tipo">Tipo da operação</label>
+					<select th:field="*{tipo}" name="tipo" class="form-select " aria-label=".form-select-lg example">
+						<option value="">Selecione</option>
+					    <option th:each="tipo: ${T(br.com.renanlabs.mvc.financesonpoint.model.TipoTransacao).values()}" 
+					        th:value="${tipo}" th:text="${tipo}"></option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="tipo">Carteira destino :</label> 
+					<select th:field="*{destino}" name="destino" id="destino" class="form-select " aria-label=".form-select-lg example">
+						<option value="">Selecione</option>
+			            <option th:each="carteira : ${carteiras}"
+			                    th:text="${carteira.descricao}"
+			                    th:value="${carteira.id}">
+					</select>
+				</div>
+				<div>
+					
+				</div>
+
+				<button class="btn btn-primary" type="submit">Cadastrar</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>
