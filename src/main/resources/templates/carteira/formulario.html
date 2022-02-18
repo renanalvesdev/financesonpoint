@@ -66,9 +66,21 @@
 							</div>
 							
 							
-							<div class="row ">
+							<div class="row " th:if="${transacao.despesa != null}">
 								<div>Debito referente a despesa de ID:
 									<span th:text="${transacao.despesa.id}" ></span>
+								</div>
+							</div>
+							
+							<div class="row " th:if="${transacao.destino != null}">
+								<div>Destino da transferência:
+									<span th:text="${transacao.destino.descricao}" ></span>
+								</div>
+							</div>
+							
+							<div class="row " th:if="${transacao.origem != null}">
+								<div>Origem da transferencia:
+									<span th:text="${transacao.origem.descricao}" ></span>
 								</div>
 							</div>
 						

@@ -13,12 +13,21 @@ import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraTransacaoReposito
 public class CarteiraTransacaoService {
 	
 	@Autowired
+	private RealizaTransacaoFactory realizaTransacaoFactory;
+	
+	
+	@Autowired
 	private CarteiraTransacaoRepository carteiraTransacaoRepository;
 	
 	public void save(CarteiraTransacao carteiraTransacao) {
+		//cria uma transacao para a carteira dessa transacao do tipo transferencia e seta destino como destino
+		// subtrai do saldo do obj. carteira dessa transacao e salva
+		//cria uma transacao para carteira destino do tipo transferencia e seta origem como carteira dessa transacao
+		//acrescenta do saldo da destino e salva
 		
-		
-		carteiraTransacaoRepository.save(carteiraTransacao);
+		//do transaction
+		RealizadorTransacao realizadorTransacao = realizaTransacaoFactory.getTransacao(carteiraTransacao.getTipo());
+		realizadorTransacao.efetua(carteiraTransacao);
 	}
 	
 	public List<CarteiraTransacao> transacoesPorCarteira(Carteira carteira){

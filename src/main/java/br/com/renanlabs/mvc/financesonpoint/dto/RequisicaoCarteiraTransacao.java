@@ -19,6 +19,8 @@ public class RequisicaoCarteiraTransacao {
 	
 	private Carteira destino;
 	
+	private Carteira carteira;
+	
 	public RequisicaoCarteiraTransacao() {
 		// TODO Auto-generated constructor stub
 	}
@@ -29,6 +31,7 @@ public class RequisicaoCarteiraTransacao {
 		this.valor = carteiraTransacao.getValor();
 		this.tipo = carteiraTransacao.getTipo();
 		this.destino = carteiraTransacao.getDestino();
+		this.carteira = carteiraTransacao.getCarteira();
 	}
 	
 	public CarteiraTransacao toCarteiraTransacao() {
@@ -38,6 +41,7 @@ public class RequisicaoCarteiraTransacao {
 		carteiraTransacao.setValor(valor);
 		carteiraTransacao.setTipo(tipo);
 		carteiraTransacao.setDestino(destino);
+		carteiraTransacao.setCarteira(carteira);
 
 		return carteiraTransacao;
 	}
@@ -81,6 +85,14 @@ public class RequisicaoCarteiraTransacao {
 
 	public void setDestino(Carteira destino) {
 		this.destino = destino;
+	}
+
+	public Carteira getCarteira() {
+		return carteira;
+	}
+
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
 	}
 
 	

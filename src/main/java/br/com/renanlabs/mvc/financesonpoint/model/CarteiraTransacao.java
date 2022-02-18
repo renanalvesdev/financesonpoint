@@ -47,6 +47,21 @@ public class CarteiraTransacao {
 		
 	}
 	
+	public CarteiraTransacao(Carteira carteira, TipoTransacao tipo, Double valor, Operacao despesa) {
+		this.carteira = carteira;
+		this.tipo = tipo;
+		this.valor = valor;
+		this.despesa = despesa;
+		this.data = LocalDate.now();
+	}
+	
+	public CarteiraTransacao(Carteira carteira, TipoTransacao tipo, Double valor, Carteira origem) {
+		this.tipo = tipo;
+		this.valor = valor;
+		this.origem = origem;
+		this.data = LocalDate.now();
+	}
+	
 	public CarteiraTransacao(Carteira carteira) {
 		this.carteira = carteira;
 	}

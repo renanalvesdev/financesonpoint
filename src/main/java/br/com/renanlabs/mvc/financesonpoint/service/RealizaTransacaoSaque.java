@@ -1,5 +1,7 @@
 package br.com.renanlabs.mvc.financesonpoint.service;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,34 +12,31 @@ import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraTransacaoReposito
 
 
 @Service
-public class RealizaTransacaoDebito implements RealizadorTransacao{
-
+public class RealizaTransacaoSaque implements RealizadorTransacao{
 	
 	@Autowired
 	private CarteiraRepository carteiraRepository;
 	
-	
 	@Autowired
 	private CarteiraTransacaoRepository carteiraTransacaoRepository;
 	
-	public RealizaTransacaoDebito() {
+	
+	public RealizaTransacaoSaque() {
 		
 	}
-	
-	@Override
-	public void efetua(CarteiraTransacao transacao) {
-		
-		//doing debit in selected wallet
-		Carteira carteira = transacao.getCarteira();
-		carteira.setValor(carteira.getValor() - transacao.getValor());
 
+	@Override
+	public void efetua(CarteiraTransacao carteiraTransacao) {
+		
+		//atualiza carteira
+		Carteira carteira = carteiraTransacao.getCarteira();
+		carteira.setValor(carteira.getValor() - carteiraTransacao.getValor());
 		carteiraRepository.save(carteira);
-		carteiraTransacaoRepository.save(transacao);
+
+		//salva transacao
+		carteiraTransacao.setData(LocalDate.now());
+		carteiraTransacaoRepository.save(carteiraTransacao);
 		
 	}
-	
-	
-	
-	
 
 }
