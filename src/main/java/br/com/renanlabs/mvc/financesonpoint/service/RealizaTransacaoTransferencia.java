@@ -34,11 +34,15 @@ public class RealizaTransacaoTransferencia implements RealizadorTransacao{
 		//cria uma transacao para carteira destino do tipo transferencia e seta origem como carteira dessa transacao
 		//acrescenta do saldo da destino e salva
 		
+		Carteira origem = carteiraTransacao.getCarteira();
+		Carteira destino = carteiraTransacao.getDestino();
+		
 		//CARTEIRA ORIGEM
 		
 		//debitando da carteira origem
-		Carteira origem = carteiraTransacao.getCarteira();
-		origem.setValor(origem.getValor() - carteiraTransacao.getValor());
+		DebitaCarteira debitaCarteira = new DebitaCarteira();
+		debitaCarteira.efetua(origem, carteiraTransacao.getValor());
+		
 		carteiraRepository.save(origem);
 		
 		//realizando a transacao com destino carteira 2
@@ -49,8 +53,8 @@ public class RealizaTransacaoTransferencia implements RealizadorTransacao{
 		//CARTEIRA DESTINO
 		
 		//creditando carteira destino
-		Carteira destino = carteiraTransacao.getDestino();
-		destino.setValor(destino.getValor() + carteiraTransacao.getValor());
+		CreditaCarteira creditaCarteira = new CreditaCarteira();
+		creditaCarteira.efetua(destino, carteiraTransacao.getValor());
 		carteiraRepository.save(destino);
 		
 		//realizando a transacao na carteira 'destino' com origem carteira 'origem'

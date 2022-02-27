@@ -19,34 +19,34 @@
 
 		<a href="/operacao/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
 		
-		<div class="card mb-3" th:each="operacao : ${operacoes}">
-
-			<div class="card-body">
-				<div class="row">
-					<div class="col-12 col-sm-8 mb-3">
-						<div class="row ">
-							<div class="col-md-5">
-								Valor: <span th:if="${operacao.valor} != null"
-									th:text="${ 'R$ ' + operacao.valor}">200,99</span>
-							</div>
-							<div class="col-md-6">
-								Efetuada em: <span
-									th:text="${#temporals.format(operacao.data, 'dd/MM/yyyy')}">10/02/2020</span>
-									
-							</div>
-							
-						</div>
-
-						<div>Descrição:</div>
-						<div>
-							<textarea class="form-control" th:text="${operacao.descricao}" disabled>descrição do operacao</textarea>
-						</div>
-						<a th:href="@{/operacao/formulario/editar/{id}(id=${operacao.id})}">Editar</a></td>
-					</div>
-
-				</div>
-			</div>
-		</div>
+		<table class="table table-striped  table-bordered">
+				    <thead>
+				        <tr>
+				            <th scope="col"> Descrição </th>
+				            <th scope="col"> Valor </th>
+				            <th scope="col"> Categoria </th>
+				            <th scope="col"> Carteira </th>
+				            <th scope="col"> Data </th>
+				            <th scope="col"> Efetuada </th>
+				            <th scope="col"> Ações </th>
+				        </tr>
+				    </thead>
+				    <tbody>
+						<tr th:if="${operacoes.empty}">
+				            <td colspan="2"> Nenhuma operação realizada. </td>
+				        </tr>
+				        <tr  th:each="operacao : ${operacoes}">
+				            <td><span th:text="${operacao.descricao}"> Descrição </span></td>
+				            <td><span th:text="${ 'R$ ' + operacao.valor}"></span></td>
+				            <td><span th:text="${operacao.categoria}"> Categoria </span></td>
+				             <td><span th:text="${operacao.carteira}"> Carteira </span></td>
+				            <td><span th:text="${#temporals.format(operacao.data, 'dd/MM/yyyy')}"> Data </span></td>
+				            <td><span th:text="${operacao.efetuada ? 'Sim' : 'Não' }"> Efetuada </span></td>
+				            <td><a th:href="@{/operacao/formulario/editar/{id}(id=${operacao.id})}">Editar</a></td>
+				        </tr>
+				    </tbody>
+				</table>
+		
 	</div>
 </body>
 </html>

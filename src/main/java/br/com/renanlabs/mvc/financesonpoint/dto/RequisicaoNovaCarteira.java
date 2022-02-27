@@ -11,7 +11,7 @@ public class RequisicaoNovaCarteira {
 	@NotBlank
 	private String descricao;
 	
-	private Double valor;
+	private Double valor =  0.00;
 	
 	public RequisicaoNovaCarteira() {
 		// TODO Auto-generated constructor stub

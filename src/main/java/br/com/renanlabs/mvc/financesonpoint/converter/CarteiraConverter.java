@@ -15,8 +15,15 @@ private CarteiraRepository repository;
 
     @Override
     public Carteira convert(String arg0) {
-        Long id = Long.valueOf(arg0);
-    	return repository.getOne(id);
+    	
+    	try {
+    		Long id = Long.valueOf(arg0);
+        	return repository.getOne(id);
+		} catch (Exception e) {
+			System.out.println("houve um erro na conversao;");
+			return null;
+		}
+        
     }
 
 

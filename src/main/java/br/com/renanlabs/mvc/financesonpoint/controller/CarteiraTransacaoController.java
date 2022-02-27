@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoCarteiraTransacao;
+import br.com.renanlabs.mvc.financesonpoint.exception.FinancesOnPointException;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
 import br.com.renanlabs.mvc.financesonpoint.service.CarteiraService;
@@ -60,14 +61,20 @@ public class CarteiraTransacaoController {
 	
 	//save
 	@PostMapping("save")
-	public String save(@Valid RequisicaoCarteiraTransacao requisicao, BindingResult result) {
+	public String save(@Valid RequisicaoCarteiraTransacao requisicao, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			return "carteiraTransacao/formulario";
 		}
 
-		CarteiraTransacao carteiraTransacao = requisicao.toCarteiraTransacao();
-		carteiraTransacaoService.save(carteiraTransacao);
+		try {
+			CarteiraTransacao carteiraTransacao = requisicao.toCarteiraTransacao();
+			carteiraTransacaoService.save(carteiraTransacao);
+		} catch (FinancesOnPointException e) {
+			 model.addAttribute("errorMessage",e.getMessage());
+			 return "carteiraTransacao/formulario";
+		}
+		
 
 		return "redirect:/carteira/listagem";
 	}

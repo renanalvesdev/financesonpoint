@@ -34,6 +34,10 @@ public class Categoria {
 	}
 	
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.descricao;
+	}
 
 }

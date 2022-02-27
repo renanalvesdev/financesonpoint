@@ -13,7 +13,7 @@ public class Carteira {
 	
 	private String descricao;
 	
-	private Double valor;
+	private Double valor = 0.00;
 
 	public Long getId() {
 		return id;
@@ -39,7 +39,11 @@ public class Carteira {
 		this.valor = valor;
 	}
 	
-	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.descricao;
+	}
 	
 
 }

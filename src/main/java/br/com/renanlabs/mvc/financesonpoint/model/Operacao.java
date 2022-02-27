@@ -27,6 +27,10 @@ public class Operacao {
 	
 	@OneToOne
 	private Carteira carteira;
+
+	@OneToOne
+	private Categoria categoria;
+
 	
 	public Long getId() {
 		return id;
@@ -70,6 +74,12 @@ public class Operacao {
 	}
 	public void setCarteira(Carteira carteira) {
 		this.carteira = carteira;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 	
 	

@@ -17,6 +17,9 @@ public class RealizaTransacaoFactory {
 	@Autowired
 	private RealizaTransacaoSaque realizaTransacaoSaque;
 	
+	@Autowired
+	private RealizaTransacaoDeposito realizaTransacaoDeposito;
+	
 	public RealizaTransacaoFactory() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,6 +36,10 @@ public class RealizaTransacaoFactory {
 		
 		if(tipo.equals(TipoTransacao.SAQUE)) {
 			return realizaTransacaoSaque;
+		}
+		
+		if(tipo.equals(TipoTransacao.DEPOSITO)) {
+			return realizaTransacaoDeposito;
 		}
 		
 		throw new RuntimeException("No transaction type was defined.");

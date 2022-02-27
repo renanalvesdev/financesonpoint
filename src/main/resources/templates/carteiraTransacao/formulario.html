@@ -5,6 +5,11 @@
 <body>
 	<div class="container">
 		<div th:replace="~{base::titulo('Transação Carteira')}"></div>
+		
+		<div class="alert alert-danger" role="alert" th:if="${errorMessage}">
+		  <span th:text="${errorMessage}">Error</span>
+		</div>
+		
 
 		<div class="card mt-3">
 			<form th:object="${requisicaoCarteiraTransacao}" class="card-body"

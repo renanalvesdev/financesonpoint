@@ -10,21 +10,23 @@
 
 		<a href="/categoria/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
 		
-		<div class="card mb-3" th:each="categoria : ${categorias}">
-
-			<div class="card-body">
-				<div class="row">
-					<div class="col-12 col-sm-8 mb-3">
-						<div>Descrição:</div>
-						<div>
-							<textarea class="form-control" th:text="${categoria.descricao}" disabled>descri��o do categoria</textarea>
-						</div>
-						<a th:href="@{/categoria/formulario/editar/{id}(id=${categoria.id})}">Editar</a></td>
-					</div>
-
-				</div>
-			</div>
-		</div>
+		<table class="table table-striped  table-bordered">
+				    <thead>
+				        <tr>
+				            <th scope="col"> Descrição </th>
+				            <th scope="col"> Ações </th>
+				        </tr>
+				    </thead>
+				    <tbody>
+						<tr th:if="${categorias.empty}">
+				            <td colspan="2"> Nenhuma categoria cadastrada. </td>
+				        </tr>
+				        <tr  th:each="categoria : ${categorias}">
+				            <td><span th:text="${categoria.descricao}"> Descrição </span></td>
+				            <td><a th:href="@{/categoria/formulario/editar/{id}(id=${categoria.id})}">Editar</a></td></td>
+				        </tr>
+				    </tbody>
+				</table>
 	</div>
 </body>
 </html>

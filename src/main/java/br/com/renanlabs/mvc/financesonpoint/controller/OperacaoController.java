@@ -1,6 +1,5 @@
 package br.com.renanlabs.mvc.financesonpoint.controller;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoNovaOperacao;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
-import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
+import br.com.renanlabs.mvc.financesonpoint.model.Categoria;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
-import br.com.renanlabs.mvc.financesonpoint.model.TipoTransacao;
 import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraRepository;
 import br.com.renanlabs.mvc.financesonpoint.repository.OperacaoRepository;
+import br.com.renanlabs.mvc.financesonpoint.service.CategoriaService;
 import br.com.renanlabs.mvc.financesonpoint.service.OperacaoService;
 
 @Controller
@@ -34,7 +33,11 @@ public class OperacaoController {
 	private CarteiraRepository carteiraRepository;
 	
 	@Autowired
+	private CategoriaService categoriaService;
+	
+	@Autowired
 	private OperacaoService operacaoService;
+	
 	
 	/**methods to handling showing of form**/
 	
@@ -43,7 +46,9 @@ public class OperacaoController {
 	public String showNewForm(RequisicaoNovaOperacao requisicao, Model model) {
 		
 		List<Carteira> carteiras = carteiraRepository.findAll();
+		List<Categoria> categorias = categoriaService.findAll();
 		
+		model.addAttribute("categorias", categorias);
 		model.addAttribute("carteiras", carteiras);
 		
 		return "operacao/formulario";
@@ -52,10 +57,17 @@ public class OperacaoController {
 	// show fetched Operation form
 	@GetMapping("/formulario/editar/{id}")
 	public String showUpdateForm(@PathVariable("id") long id, Model model) {
+		
+		List<Carteira> carteiras = carteiraRepository.findAll();
+		List<Categoria> categorias = categoriaService.findAll();
+		
 		Operacao operacao = operacaoRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		
 		RequisicaoNovaOperacao requisicaoNovaOperacao = new RequisicaoNovaOperacao(operacao);
+		
+		model.addAttribute("categorias", categorias);
+		model.addAttribute("carteiras", carteiras);
 		model.addAttribute("requisicaoNovaOperacao", requisicaoNovaOperacao);
 		
 		return "operacao/formulario";

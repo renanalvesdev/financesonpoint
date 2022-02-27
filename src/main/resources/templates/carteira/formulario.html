@@ -5,7 +5,8 @@
 <body>
 	<div class="container">
 		<div th:replace="~{base::titulo('Nova Carteira')}"></div>
-
+		
+		
 		<div class="card mt-3">
 			<form th:object="${requisicaoNovaCarteira}" class="card-body"
 				action="/carteira/save" method="POST">
@@ -21,22 +22,19 @@
 						placeholder="Exemplo: Mercantil"></textarea>
 				</div>
 				
-				<div class="form-group">
-					<label for="descricao">Valor</label>
-					<input class="form-control" name="valor"
-						th:field="*{valor}"
-						placeholder="Valor">
-				</div>
 
-				<div>
-					
+				<div style="text-align: center; margin: 25px">
+					<h4>Saldo:</h4>
+					<h4 th:text="*{'R$ ' + valor}">Saldo:</h4>
 				</div>
 
 				<button class="btn btn-primary" type="submit">Cadastrar</button>
-				
-				
-				
+
 			</form>
+			
+			<div >
+				
+			</div>
 			
 			<h6 style="text-align:center">Transações da Carteira</h6>
 				
@@ -44,49 +42,32 @@
 					<button class="btn btn-outline-secondary my-2 my-sm-0">Nova transação</button>
 				</a>
 				
-				<div class="card mb-3" th:each="transacao : ${transacoesCarteira}">
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-6">
-								Tipo de Operacao: <span
-									th:text="${transacao.tipo}"></span>
-									
-							</div>
-							<div class="col-md-6">
-								Data: <span
-									th:text="${#temporals.format(transacao.data, 'dd/MM/yyyy')}"></span>
-									
-							</div>
-							
-							<div class="row ">
-								<div class="col-md-5">
-									Valor: 
-									<span th:text="${ 'R$ ' + transacao.valor}"></span>
-								</div>
-							</div>
-							
-							
-							<div class="row " th:if="${transacao.despesa != null}">
-								<div>Debito referente a despesa de ID:
-									<span th:text="${transacao.despesa.id}" ></span>
-								</div>
-							</div>
-							
-							<div class="row " th:if="${transacao.destino != null}">
-								<div>Destino da transferência:
-									<span th:text="${transacao.destino.descricao}" ></span>
-								</div>
-							</div>
-							
-							<div class="row " th:if="${transacao.origem != null}">
-								<div>Origem da transferencia:
-									<span th:text="${transacao.origem.descricao}" ></span>
-								</div>
-							</div>
-						
-						</div>
-					</div>
-				</div>
+				<table class="table table-striped  table-bordered" th:if="${transacoesCarteira != null}">
+				    <thead>
+				        <tr>
+				            <th scope="col"> Tipo </th>
+				            <th scope="col"> Valor </th>
+				            <th scope="col"> Data </th>
+				            <th scope="col"> Despesa </th>
+				            <th scope="col"> Destino </th>
+				            <th scope="col"> Origem </th>
+				        </tr>
+				    </thead>
+				    <tbody>
+						<tr th:if="${transacoesCarteira.empty}">
+				            <td colspan="2"> Nenhuma transferência realizada nessa carteira. </td>
+				        </tr>
+				        <tr  th:each="transacao : ${transacoesCarteira}">
+				            <td><span th:text="${transacao.tipo}"> Tipo </span></td>
+				            <td><span th:text="${ 'R$ ' + transacao.valor}"></span></td>
+				            <td><span th:text="${#temporals.format(transacao.data, 'dd/MM/yyyy')}"> Data </span></td>
+				            <td><span th:if="${transacao.despesa != null}" th:text="${transacao.despesa.id}" >Despesa</span> 
+				            <td><span th:if="${transacao.destino != null}" th:text="${transacao.destino.descricao}" >Destino</span> 
+				            <td><span th:if="${transacao.origem != null}" th:text="${transacao.origem.descricao}" >Origem</span> 
+				            
+				        </tr>
+				    </tbody>
+				</table>
 		</div>
 	</div>
 </body>
