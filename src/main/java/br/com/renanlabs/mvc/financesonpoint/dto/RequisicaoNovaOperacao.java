@@ -3,7 +3,6 @@ package br.com.renanlabs.mvc.financesonpoint.dto;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,7 +10,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Categoria;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
+import br.com.renanlabs.mvc.financesonpoint.model.PlanejamentoMensal;
 
+/**
+ * @author jdoe
+ *
+ */
 public class RequisicaoNovaOperacao {
 
 	private Long id;
@@ -34,6 +38,9 @@ public class RequisicaoNovaOperacao {
 	@NotNull(message = "A categoria é obrigatória")
 	private Categoria categoria;
 
+	@NotNull
+	private PlanejamentoMensal planejamento;
+
 	public RequisicaoNovaOperacao() {
 		// TODO Auto-generated constructor stubpode
 	}
@@ -47,6 +54,7 @@ public class RequisicaoNovaOperacao {
 		this.efetuada = operacao.isEfetuada();
 		this.carteira = operacao.getCarteira();
 		this.categoria = operacao.getCategoria();
+		this.planejamento = operacao.getPlanejamentoMensal();
 	}
 
 	public Operacao toOperacao() {
@@ -58,7 +66,8 @@ public class RequisicaoNovaOperacao {
 		operacao.setEfetuada(efetuada);
 		operacao.setCarteira(carteira);
 		operacao.setCategoria(categoria);
-
+		operacao.setPlanejamentoMensal(planejamento);
+		
 		return operacao;
 	}
 
@@ -118,4 +127,13 @@ public class RequisicaoNovaOperacao {
 		this.categoria = categoria;
 	}
 
+	public PlanejamentoMensal getPlanejamento() {
+		return planejamento;
+	}
+
+	public void setPlanejamento(PlanejamentoMensal planejamento) {
+		this.planejamento = planejamento;
+	}
+
+	
 }

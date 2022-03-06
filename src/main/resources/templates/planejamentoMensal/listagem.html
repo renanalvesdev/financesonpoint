@@ -1,0 +1,36 @@
+<html>
+<head th:replace="~{base::head}">
+
+</head>
+
+<body>
+	<div th:replace="~{base :: logo}" />
+	<div class="container">
+		<div th:replace="~{base::titulo('Planejamentos')}"></div>
+
+		<a href="/planejamentoMensal/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+		
+		<table class="table table-striped  table-bordered">
+				    <thead>
+				        <tr>
+				            <th scope="col"> Descrição </th>
+				            <th scope="col"> Valor </th>
+				            <th scope="col"> Ações </th>
+				        </tr>
+				    </thead>
+				    <tbody>
+						<tr th:if="${planejamentos.empty}">
+				            <td colspan="2"> Nenhuma operação realizada. </td>
+				        </tr>
+				        <tr  th:each="planejamento : ${planejamentos}">
+				            <td><span th:text="${planejamento.descricao}"> Descrição </span></td>
+				            <td><span th:text="${ 'R$ ' + planejamento.valor}">Saldo</span></td>
+				            <td><a th:href="@{/planejamentoMensal/formulario/editar/{id}(id=${planejamento.id})}">Editar</a></td></td>
+				        </tr>
+				    </tbody>
+		</table>
+		
+		
+	</div>
+</body>
+</html>

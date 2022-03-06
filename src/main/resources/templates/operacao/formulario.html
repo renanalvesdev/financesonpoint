@@ -64,6 +64,17 @@
 					</select>
 					<div class="invalid-feedback" th:errors="*{carteira}"></div>
 				</div>
+				
+				<div class="form-group">
+					<label for="tipo">Planejamento :</label> 
+					<select th:field="*{planejamento}" name="planejamento" id="planejamento" class="form-select " aria-label=".form-select-lg example" th:errorclass="is-invalid">
+						<option value="">Selecione</option>
+			            <option th:each="planejamento : ${planejamentos}"
+			                    th:text="${planejamento.descricao}"
+			                    th:value="${planejamento.id}">
+					</select>
+					<div class="invalid-feedback" th:errors="*{planejamento}"></div>
+				</div>
        			
 				<button class="btn btn-primary" type="submit">Cadastrar</button>
 			</form>

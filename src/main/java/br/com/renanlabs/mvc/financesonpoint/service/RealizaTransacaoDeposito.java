@@ -1,7 +1,5 @@
 package br.com.renanlabs.mvc.financesonpoint.service;
 
-import java.time.LocalDate;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

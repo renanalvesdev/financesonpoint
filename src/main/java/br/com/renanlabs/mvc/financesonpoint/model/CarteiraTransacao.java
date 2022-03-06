@@ -47,10 +47,10 @@ public class CarteiraTransacao {
 		
 	}
 	
-	public CarteiraTransacao(Carteira carteira, TipoTransacao tipo, Double valor, Operacao despesa) {
-		this.carteira = carteira;
+	public CarteiraTransacao(TipoTransacao tipo, Operacao despesa) {
+		this.carteira = despesa.getCarteira();
 		this.tipo = tipo;
-		this.valor = valor;
+		this.valor = despesa.getValor();
 		this.despesa = despesa;
 		this.data = LocalDate.now();
 	}

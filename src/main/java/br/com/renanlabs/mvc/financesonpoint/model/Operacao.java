@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+//despesa
+
 @Entity
 public class Operacao {
 
@@ -30,6 +32,9 @@ public class Operacao {
 
 	@OneToOne
 	private Categoria categoria;
+	
+	@OneToOne
+	private PlanejamentoMensal planejamentoMensal;
 
 	
 	public Long getId() {
@@ -81,6 +86,13 @@ public class Operacao {
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	public PlanejamentoMensal getPlanejamentoMensal() {
+		return planejamentoMensal;
+	}
+	public void setPlanejamentoMensal(PlanejamentoMensal planejamentoMensal) {
+		this.planejamentoMensal = planejamentoMensal;
+	}
+	
 	
 	
 

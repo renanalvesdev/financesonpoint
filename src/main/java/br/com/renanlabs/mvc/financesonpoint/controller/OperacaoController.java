@@ -17,10 +17,12 @@ import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoNovaOperacao;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Categoria;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
+import br.com.renanlabs.mvc.financesonpoint.model.PlanejamentoMensal;
 import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraRepository;
 import br.com.renanlabs.mvc.financesonpoint.repository.OperacaoRepository;
 import br.com.renanlabs.mvc.financesonpoint.service.CategoriaService;
 import br.com.renanlabs.mvc.financesonpoint.service.OperacaoService;
+import br.com.renanlabs.mvc.financesonpoint.service.PlanejamentoMensalService;
 
 @Controller
 @RequestMapping("operacao")
@@ -38,18 +40,22 @@ public class OperacaoController {
 	@Autowired
 	private OperacaoService operacaoService;
 	
+	@Autowired
+	private PlanejamentoMensalService planejamentoMensalService;
 	
 	/**methods to handling showing of form**/
 	
 	//show new Operation form
 	@GetMapping("formulario")
 	public String showNewForm(RequisicaoNovaOperacao requisicao, Model model) {
-		
+
 		List<Carteira> carteiras = carteiraRepository.findAll();
 		List<Categoria> categorias = categoriaService.findAll();
+		List<PlanejamentoMensal> planejamentos = planejamentoMensalService.findByMesAtual(); 
 		
 		model.addAttribute("categorias", categorias);
 		model.addAttribute("carteiras", carteiras);
+		model.addAttribute("planejamentos", planejamentos);
 		
 		return "operacao/formulario";
 	}
@@ -64,10 +70,15 @@ public class OperacaoController {
 		Operacao operacao = operacaoRepository.findById(id)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 		
+		List<PlanejamentoMensal> planejamentos = planejamentoMensalService.findByMesDeData(operacao.getData()); 
+
+		
 		RequisicaoNovaOperacao requisicaoNovaOperacao = new RequisicaoNovaOperacao(operacao);
 		
 		model.addAttribute("categorias", categorias);
 		model.addAttribute("carteiras", carteiras);
+		model.addAttribute("planejamentos", planejamentos);
+
 		model.addAttribute("requisicaoNovaOperacao", requisicaoNovaOperacao);
 		
 		return "operacao/formulario";
