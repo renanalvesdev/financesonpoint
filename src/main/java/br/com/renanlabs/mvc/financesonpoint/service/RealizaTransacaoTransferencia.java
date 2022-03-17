@@ -41,6 +41,7 @@ public class RealizaTransacaoTransferencia implements RealizadorTransacao{
 		
 		//debitando da carteira origem
 		DebitaCarteira debitaCarteira = new DebitaCarteira();
+		carteiraTransacao.setValorRoot((-1)*carteiraTransacao.getValor());
 		debitaCarteira.efetua(origem, carteiraTransacao.getValor());
 		
 		carteiraRepository.save(origem);
@@ -59,6 +60,7 @@ public class RealizaTransacaoTransferencia implements RealizadorTransacao{
 		
 		//realizando a transacao na carteira 'destino' com origem carteira 'origem'
 		CarteiraTransacao transacaoDestino = new CarteiraTransacao(destino, TipoTransacao.TRANSFERENCIA, carteiraTransacao.getValor(), origem);
+		transacaoDestino.setValorRoot(carteiraTransacao.getValor());
 		carteiraTransacaoRepository.save(transacaoDestino);
 		
 	}

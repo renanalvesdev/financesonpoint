@@ -32,6 +32,8 @@ public class RealizaTransacaoDeposito implements RealizadorTransacao{
 		CreditaCarteira creditaCarteira = new CreditaCarteira();
 		creditaCarteira.efetua(carteira, carteiraTransacao.getValor());
 		
+		carteiraTransacao.setValorRoot(carteiraTransacao.getValor());
+		
 		carteiraRepository.save(carteira);
 		carteiraTransacaoRepository.save(carteiraTransacao);
 		

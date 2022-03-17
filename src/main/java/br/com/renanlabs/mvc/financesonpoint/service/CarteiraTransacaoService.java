@@ -31,7 +31,7 @@ public class CarteiraTransacaoService {
 	}
 	
 	public List<CarteiraTransacao> transacoesPorCarteira(Carteira carteira){
-		return carteiraTransacaoRepository.findByCarteira(carteira);
+		return carteiraTransacaoRepository.findByCarteiraOrderByDataDesc(carteira);
 	}
 	
 	public CarteiraTransacao findById(Long id) {

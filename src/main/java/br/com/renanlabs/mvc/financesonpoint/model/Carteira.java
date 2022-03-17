@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.Formula;
+
 @Entity
 public class Carteira {
 
@@ -14,6 +16,9 @@ public class Carteira {
 	private String descricao;
 	
 	private Double valor = 0.00;
+	
+	@Formula("(SELECT COALESCE(SUM(c.valor_root),2) FROM carteira_transacao c where c.carteira_id = id)")
+	private Double saldo = 0.00;
 
 	public Long getId() {
 		return id;
@@ -39,6 +44,16 @@ public class Carteira {
 		this.valor = valor;
 	}
 	
+	
+	
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
+	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub

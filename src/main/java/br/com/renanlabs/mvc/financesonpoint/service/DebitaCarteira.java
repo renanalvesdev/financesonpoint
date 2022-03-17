@@ -2,6 +2,7 @@ package br.com.renanlabs.mvc.financesonpoint.service;
 
 import br.com.renanlabs.mvc.financesonpoint.exception.FinancesOnPointException;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
+import br.com.renanlabs.mvc.financesonpoint.util.MonetaryUtil;
 
 public class DebitaCarteira implements OperacaoBasica{
 
@@ -11,10 +12,10 @@ public class DebitaCarteira implements OperacaoBasica{
 		
 		//'valor' should be 'saldo'
 		
-		if(valor > carteira.getValor())
+		if(valor > MonetaryUtil.formatTwoDecimalPlaces(carteira.getSaldo()))
 			throw new FinancesOnPointException("Operação impossíel, pois o valor do saque supera o saldo da carteira");
 		
-		carteira.setValor(carteira.getValor() - valor);
+		carteira.setValor(carteira.getSaldo());
 		
 	}
 

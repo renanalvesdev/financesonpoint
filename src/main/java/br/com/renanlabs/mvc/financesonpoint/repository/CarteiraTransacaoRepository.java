@@ -11,5 +11,5 @@ import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
 @Repository
 public interface CarteiraTransacaoRepository extends JpaRepository<CarteiraTransacao, Long> {
 
-	List<CarteiraTransacao> findByCarteira(Carteira carteira);
+	List<CarteiraTransacao> findByCarteiraOrderByDataDesc(Carteira carteira);
 }

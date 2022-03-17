@@ -31,7 +31,10 @@ public class OperacaoService {
 		operacao = operacaoRepository.save(operacao);
 		
 		//atualiza o planejamento - se tiver
-		atualizadorPlanejamento.atualiza(operacao.getPlanejamentoMensal());
+		if(operacao.getPlanejamentoMensal() != null) {
+			atualizadorPlanejamento.atualiza(operacao.getPlanejamentoMensal());
+		}
+
 		// do debit transaction
 		realizaTransacaoDebito.efetua(new CarteiraTransacao(TipoTransacao.DEBITO, operacao));
 

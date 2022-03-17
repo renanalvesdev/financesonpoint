@@ -13,6 +13,9 @@ public class RequisicaoNovaCarteira {
 	
 	private Double valor =  0.00;
 	
+	private Double saldo =  0.00;
+	
+	
 	public RequisicaoNovaCarteira() {
 		// TODO Auto-generated constructor stub
 	}
@@ -21,6 +24,7 @@ public class RequisicaoNovaCarteira {
 		this.id = carteira.getId();
 		this.descricao = carteira.getDescricao();
 		this.valor = carteira.getValor();
+		this.saldo = carteira.getSaldo();
 	}
 	
 	public Carteira toCarteira() {
@@ -28,7 +32,6 @@ public class RequisicaoNovaCarteira {
 		carteira.setId(id);
 		carteira.setDescricao(descricao);
 		carteira.setValor(valor);
-
 		return carteira;
 	}
 	
@@ -55,6 +58,14 @@ public class RequisicaoNovaCarteira {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	public Double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Double saldo) {
+		this.saldo = saldo;
 	}
 
 	

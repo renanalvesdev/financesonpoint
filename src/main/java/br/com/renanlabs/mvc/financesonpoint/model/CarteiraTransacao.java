@@ -10,8 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="carteira_transacao")
 public class CarteiraTransacao {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +22,8 @@ public class CarteiraTransacao {
 	private String descricao;
 	
 	private Double valor;
+	
+	private Double valorRoot;
 	
 	private LocalDate data;
 	
@@ -56,6 +60,7 @@ public class CarteiraTransacao {
 	}
 	
 	public CarteiraTransacao(Carteira carteira, TipoTransacao tipo, Double valor, Carteira origem) {
+		this.carteira = carteira;
 		this.tipo = tipo;
 		this.valor = valor;
 		this.origem = origem;
@@ -136,6 +141,14 @@ public class CarteiraTransacao {
 
 	public void setTipo(TipoTransacao tipo) {
 		this.tipo = tipo;
+	}
+
+	public Double getValorRoot() {
+		return valorRoot;
+	}
+
+	public void setValorRoot(Double valorRoot) {
+		this.valorRoot = valorRoot;
 	}
 	
 	

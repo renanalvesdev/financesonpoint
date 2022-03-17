@@ -31,6 +31,8 @@ public class RealizaTransacaoDebito implements RealizadorTransacao{
 		
 		//doing debit in selected wallet
 		DebitaCarteira debitaCarteira = new DebitaCarteira();
+		
+		transacao.setValorRoot((-1) * transacao.getValor());
 		debitaCarteira.efetua(transacao.getCarteira(), transacao.getValor());
 		
 		carteiraRepository.save(carteira);

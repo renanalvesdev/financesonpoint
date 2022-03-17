@@ -38,7 +38,6 @@ public class RequisicaoNovaOperacao {
 	@NotNull(message = "A categoria é obrigatória")
 	private Categoria categoria;
 
-	@NotNull
 	private PlanejamentoMensal planejamento;
 
 	public RequisicaoNovaOperacao() {
