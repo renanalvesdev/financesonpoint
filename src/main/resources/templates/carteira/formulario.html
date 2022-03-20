@@ -6,7 +6,6 @@
 	<div class="container">
 		<div th:replace="~{base::titulo('Nova Carteira')}"></div>
 		
-		
 		<div class="card mt-3">
 			<form th:object="${requisicaoNovaCarteira}" class="card-body"
 				action="/carteira/save" method="POST">
@@ -61,14 +60,25 @@
 				            <td><span th:text="${transacao.tipo}"> Tipo </span></td>
 				            <td><span th:text="${ 'R$ ' + transacao.valorRoot}"></span></td>
 				            <td><span th:text="${#temporals.format(transacao.data, 'dd/MM/yyyy')}"> Data </span></td>
-				            <td><span th:if="${transacao.despesa != null}" th:text="${transacao.despesa.id}" >Despesa</span> 
+				            <td style="text-align: center;">
+				            	<button
+				            	 th:attr="data-object-id=${transacao.despesa.id}"
+				            	 type="button" id="buttontest" class="btn btn-primary" 
+				            	 data-toggle="modal" data-target="#despesaModal" 
+				            	 th:if="${transacao.despesa != null}">
+									<i class="fa fa-search"></i>
+				            	</button>
+				            </td> 
 				            <td><span th:if="${transacao.destino != null}" th:text="${transacao.destino.descricao}" >Destino</span> 
 				            <td><span th:if="${transacao.origem != null}" th:text="${transacao.origem.descricao}" >Origem</span> 
 				            
 				        </tr>
 				    </tbody>
 				</table>
+				<th:block th:replace="~{_modals :: modal('despesaModal', 'Despesa')}">modal</th:block>
 		</div>
 	</div>
+	<script type="text/javascript" th:src="@{/js/despesa/despesa.js}"></script>
 </body>
+
 </html>

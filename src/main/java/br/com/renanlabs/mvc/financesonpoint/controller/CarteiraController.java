@@ -29,7 +29,6 @@ public class CarteiraController {
 	@Autowired
 	private CarteiraTransacaoService carteiraTransacaoService;
 
-	
 	@GetMapping("listagem")
 	public String listagem(Model model) {
 		List<Carteira> carteiras = carteiraRepository.findAll();
