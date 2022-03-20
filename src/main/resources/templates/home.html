@@ -9,11 +9,22 @@
 		<div th:replace="~{base::titulo('Operações')}"></div>
 		
 		<form action="/home/searchByFilter" method="post" th:object="${requisicaoDespesaFilter}">
-			<div class="input-group mb-3">
-			  <input type="text" th:field="*{date}" class="form-control" placeholder="Pesquisar por um mes/ano. ex: 05/2022" aria-label="Pesquisar por um mes/ano. ex: 05/2022" aria-describedby="basic-addon2">
-			  <div class="input-group-append">
-			   	<button class="btn btn-outline-secondary" type="submit">Pesquisar</button></a>
-			  </div>
+			<div class="row" style="margin-bottom: 40px; border: 1px solid; padding-top: 10px; padding-bottom: 20px;">
+				<div class="col">
+					<label>Mês</label>
+					<input type="text" th:field="*{date}" class="form-control" placeholder="Pesquisar por um mes/ano. ex: 05/2022" aria-label="Pesquisar por um mes/ano. ex: 05/2022" aria-describedby="basic-addon2">
+				</div>
+				<div class="col">
+					<label>Carteira:</label>
+					<input type="text" class="form-control" placeholder="Last name">
+				</div>
+				<div class="col">
+					<label>Categoria:</label>
+					<input type="text" class="form-control" placeholder="Last name">
+				</div>
+				<div class="col-12">
+					<button class="btn btn-outline-secondary" type="submit">Pesquisar</button></a>
+				</div>
 			</div>
 		</form>
 		
@@ -60,7 +71,7 @@
 								<button
 				            	 th:attr="data-object-id=${operacao.id}"
 				            	 type="button" id="buttontest" class="btn btn-primary" 
-				            	 data-toggle="modal" data-target="#despesaModal" 
+				            	 data-bs-toggle="modal" data-bs-target="#despesaModal" 
 				            	 >
 									<i class="fa fa-search"></i>
 				            	</button>
