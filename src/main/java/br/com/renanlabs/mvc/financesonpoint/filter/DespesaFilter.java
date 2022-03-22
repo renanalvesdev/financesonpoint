@@ -6,9 +6,9 @@ public class DespesaFilter {
 
 	private LocalDate date;
 	
-	private int month;
+	private Integer month;
 	
-	private int year;
+	private Integer year;
 
 
 	public DespesaFilter() {
@@ -23,19 +23,19 @@ public class DespesaFilter {
 		this.date = date;
 	}
 
-	public int getMonth() {
+	public Integer getMonth() {
 		return month;
 	}
 
-	public void setMonth(int month) {
+	public void setMonth(Integer month) {
 		this.month = month;
 	}
 
-	public int getYear() {
+	public Integer getYear() {
 		return year;
 	}
 
-	public void setYear(int year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 	

@@ -55,7 +55,7 @@ public class HomeController {
 		
 		try {
 			DespesaFilter despesaFilter = requisicaoDespesaFilter.toDespesaFilter();
-			operacoes = repository.findByMonthAndYear(despesaFilter.getMonth(), despesaFilter.getYear());
+			operacoes = repository.findByFilter(despesaFilter);
 			planejamentos = planejamentoMensalService.findByMonthAndYear(despesaFilter.getMonth(), despesaFilter.getYear());
 			
 		} catch (Exception e) {
