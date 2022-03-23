@@ -40,7 +40,17 @@ public class OperacaoRepositoryImpl implements OperacaoRepositoryCustom{
 			p = cb.and(p, cb.equal(month, filter.getYear()));
 		}
 		
+		if(filter.getCarteira() != null) {
+			p = cb.and(p, cb.equal(operacaoRoot.get("carteira"), filter.getCarteira()));
+		}
+		
+		if(filter.getCategoria() != null) {
+			p = cb.and(p, cb.equal(operacaoRoot.get("categoria"), filter.getCategoria()));
+		}
+
+		criteriaQuery.orderBy(cb.desc(operacaoRoot.get("valor")));
 		criteriaQuery.where(p);
+		
 		List<Operacao> despesas = entityManager.createQuery(criteriaQuery).getResultList();
 		
 		return despesas;

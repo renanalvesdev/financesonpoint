@@ -17,8 +17,7 @@ private CarteiraRepository repository;
     public Carteira convert(String arg0) {
     	
     	try {
-    		Long id = Long.valueOf(arg0);
-        	return repository.getOne(id);
+    		return (arg0 != null && arg0.length() > 0 )? repository.getOne(Long.valueOf(arg0)) : null;
 		} catch (Exception e) {
 			System.out.println("houve um erro na conversao;");
 			return null;

@@ -2,6 +2,9 @@ package br.com.renanlabs.mvc.financesonpoint.filter;
 
 import java.time.LocalDate;
 
+import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
+import br.com.renanlabs.mvc.financesonpoint.model.Categoria;
+
 public class DespesaFilter {
 
 	private LocalDate date;
@@ -10,6 +13,9 @@ public class DespesaFilter {
 	
 	private Integer year;
 
+	private Categoria categoria;
+	
+	private Carteira carteira;
 
 	public DespesaFilter() {
 		// TODO Auto-generated constructor stub
@@ -38,8 +44,23 @@ public class DespesaFilter {
 	public void setYear(Integer year) {
 		this.year = year;
 	}
-	
 
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Carteira getCarteira() {
+		return carteira;
+	}
+
+	public void setCarteira(Carteira carteira) {
+		this.carteira = carteira;
+	}
+	
 	
 	
 }

@@ -16,9 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoDespesaFilter;
 import br.com.renanlabs.mvc.financesonpoint.filter.DespesaFilter;
+import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
+import br.com.renanlabs.mvc.financesonpoint.model.Categoria;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
 import br.com.renanlabs.mvc.financesonpoint.model.PlanejamentoMensal;
 import br.com.renanlabs.mvc.financesonpoint.repository.OperacaoRepository;
+import br.com.renanlabs.mvc.financesonpoint.service.CarteiraService;
+import br.com.renanlabs.mvc.financesonpoint.service.CategoriaService;
 import br.com.renanlabs.mvc.financesonpoint.service.PlanejamentoMensalService;
 
 @Controller
@@ -31,8 +35,19 @@ public class HomeController {
 	@Autowired
 	private PlanejamentoMensalService planejamentoMensalService;
 	
+	@Autowired
+	private CarteiraService carteiraService;
+	
+	@Autowired
+	private CategoriaService categoriaService;
+	
+	
 	@GetMapping
 	public String home(Model model) {
+		
+		//fetching data from dropdown
+		List<Carteira> carteiras = carteiraService.findAll();
+		List<Categoria> categorias = categoriaService.findAll();
 		
 		//fetching expenses and plenned expenses for month
 		List<Operacao> operacoes = repository.findAll();
@@ -40,6 +55,8 @@ public class HomeController {
 		
 		//populating attributes to be seeing in the view
 		model.addAttribute("requisicaoDespesaFilter", new RequisicaoDespesaFilter());
+		model.addAttribute("carteiras", carteiras);
+		model.addAttribute("categorias", categorias);
 		model.addAttribute("operacoes", operacoes);
 		model.addAttribute("planejamentos", planejamentos);
 		

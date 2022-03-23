@@ -16,11 +16,21 @@
 				</div>
 				<div class="col">
 					<label>Carteira:</label>
-					<input type="text" class="form-control" placeholder="Last name">
+					<select th:field="*{carteira}" th:errorclass="is-invalid" name="carteira" id="carteira" class="form-select " aria-label=".form-select-lg example">
+						<option value="">Selecione</option>
+			            <option th:each="carteira : ${carteiras}"
+			                    th:text="${carteira.descricao}"
+			                    th:value="${carteira.id}">
+					</select>
 				</div>
 				<div class="col">
 					<label>Categoria:</label>
-					<input type="text" class="form-control" placeholder="Last name">
+						<select th:field="*{categoria}" th:errorclass="is-invalid" name="categoria" id="categoria" class="form-select " aria-label=".form-select-lg example">
+						<option value="">Selecione</option>
+			            <option th:each="categoria : ${categorias}"
+			                    th:text="${categoria.descricao}"
+			                    th:value="${categoria.id}">
+					</select>
 				</div>
 				<div class="col-12">
 					<button class="btn btn-outline-secondary" type="submit">Pesquisar</button></a>
