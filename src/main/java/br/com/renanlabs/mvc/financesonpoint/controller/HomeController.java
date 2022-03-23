@@ -63,12 +63,12 @@ public class HomeController {
 		return "home"; 
 	}
 	
-	@PostMapping("/searchByFilter")
+	@GetMapping("/searchByFilter")
 	public String searchByFilter(@Valid RequisicaoDespesaFilter requisicaoDespesaFilter, BindingResult result, Model model) {
 		
 		List<Operacao> operacoes = new ArrayList<Operacao>();
 		List<PlanejamentoMensal> planejamentos = new ArrayList<PlanejamentoMensal>();
-		
+		Double totalDespesas = 0.00;
 		
 		try {
 			DespesaFilter despesaFilter = requisicaoDespesaFilter.toDespesaFilter();
@@ -80,6 +80,10 @@ public class HomeController {
 			operacoes = repository.findAll();
 			planejamentos = planejamentoMensalService.findAll();
 		}
+		
+		totalDespesas += operacoes.stream().mapToDouble(Operacao::getValor).sum();
+		
+		model.addAttribute("totalMes", totalDespesas);
 		model.addAttribute("operacoes", operacoes);
 		model.addAttribute("planejamentos", planejamentos);
 		

@@ -12,6 +12,11 @@
             });
     });
 
+	$.extend( true, $.fn.dataTable.defaults, {
+	    "searching": false,
+	    "ordering": false
+	} );
+
     $(document).ready(function() {
         $('#example').DataTable();
     } );

@@ -45,7 +45,7 @@ public class OperacaoRepositoryImpl implements OperacaoRepositoryCustom{
 		}
 		
 		if(filter.getCategoria() != null) {
-			p = cb.and(p, cb.equal(operacaoRoot.get("categoria"), filter.getCategoria()));
+			p = cb.and(p, cb.equal(operacaoRoot.get("data"), filter.getCategoria()));
 		}
 
 		criteriaQuery.orderBy(cb.desc(operacaoRoot.get("valor")));
