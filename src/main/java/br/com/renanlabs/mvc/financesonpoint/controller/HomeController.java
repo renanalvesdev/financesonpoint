@@ -2,6 +2,7 @@ package br.com.renanlabs.mvc.financesonpoint.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -11,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoDespesaFilter;
@@ -23,6 +23,7 @@ import br.com.renanlabs.mvc.financesonpoint.model.PlanejamentoMensal;
 import br.com.renanlabs.mvc.financesonpoint.repository.OperacaoRepository;
 import br.com.renanlabs.mvc.financesonpoint.service.CarteiraService;
 import br.com.renanlabs.mvc.financesonpoint.service.CategoriaService;
+import br.com.renanlabs.mvc.financesonpoint.service.ChartService;
 import br.com.renanlabs.mvc.financesonpoint.service.PlanejamentoMensalService;
 
 @Controller
@@ -40,6 +41,9 @@ public class HomeController {
 	
 	@Autowired
 	private CategoriaService categoriaService;
+	
+	@Autowired
+	private ChartService chartService;
 	
 	
 	@GetMapping
@@ -66,12 +70,12 @@ public class HomeController {
 	@GetMapping("/searchByFilter")
 	public String searchByFilter(@Valid RequisicaoDespesaFilter requisicaoDespesaFilter, BindingResult result, Model model) {
 		
+		DespesaFilter despesaFilter = requisicaoDespesaFilter.toDespesaFilter();
 		List<Operacao> operacoes = new ArrayList<Operacao>();
 		List<PlanejamentoMensal> planejamentos = new ArrayList<PlanejamentoMensal>();
 		Double totalDespesas = 0.00;
 		
 		try {
-			DespesaFilter despesaFilter = requisicaoDespesaFilter.toDespesaFilter();
 			operacoes = repository.findByFilter(despesaFilter);
 			planejamentos = planejamentoMensalService.findByMonthAndYear(despesaFilter.getMonth(), despesaFilter.getYear());
 			
@@ -83,12 +87,23 @@ public class HomeController {
 		
 		totalDespesas += operacoes.stream().mapToDouble(Operacao::getValor).sum();
 		
+		model.addAttribute("chartData", getChartData(despesaFilter.getMonth(), despesaFilter.getYear()));
 		model.addAttribute("totalMes", totalDespesas);
 		model.addAttribute("operacoes", operacoes);
 		model.addAttribute("planejamentos", planejamentos);
 		
 		return "home";
 	}
+	
+	private List<List<Object>> getChartData(Integer mes, Integer ano) { 
+		
+        return List.of(
+        		chartService
+        		.despesasAmountPorMesAndAno(mes, ano)
+        		.stream()
+        		.map(a -> List.of(a.getDescricao(), a.getTotal()))
+        		.collect(Collectors.toList()));
+    }
 	
 	/*
 	@GetMapping("/{status}")
