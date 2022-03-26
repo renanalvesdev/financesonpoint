@@ -1,12 +1,12 @@
 package br.com.renanlabs.mvc.financesonpoint.dto;
 
-public class DespesaChart {
+public class AmountChart {
 
 	private String descricao;
 	private Double total;
 	
 	
-	public DespesaChart(String descricao, Double total) {
+	public AmountChart(String descricao, Double total) {
 		this.descricao = descricao;
 		this.total = total;
 	}

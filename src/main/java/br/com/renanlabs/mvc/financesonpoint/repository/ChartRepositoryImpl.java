@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.renanlabs.mvc.financesonpoint.dto.DespesaChart;
+import br.com.renanlabs.mvc.financesonpoint.dto.AmountChart;
 
 @Repository
 public class ChartRepositoryImpl implements ChartRepositoryCustom {
@@ -18,7 +18,7 @@ public class ChartRepositoryImpl implements ChartRepositoryCustom {
 	EntityManager entityManager;
 
 	@Override
-	public List<DespesaChart> findDespesaChart(Integer month, Integer year) {
+	public List<AmountChart> findAmountCarteiraMesChart(Integer month, Integer year) {
 
 		Query nativeQuery = entityManager
 				.createNativeQuery("select c.descricao, sum (o.valor)\r\n"
@@ -35,12 +35,39 @@ public class ChartRepositoryImpl implements ChartRepositoryCustom {
 		
 		List<Object[]> result =  nativeQuery.getResultList();
 		
-		List<DespesaChart> amounts = result
+		List<AmountChart> amounts = result
 				.stream()
-				.map(a ->  new DespesaChart((String)a[0], (Double)a[1]) )
+				.map(a ->  new AmountChart((String)a[0], (Double)a[1]) )
 				.collect(Collectors.toList());	
 		
 		return amounts;
 	}
+	
+	@Override
+	public List<AmountChart> findAmountCategoriaMesChart(Integer month, Integer year) {
+
+		Query nativeQuery = entityManager
+				.createNativeQuery("select c.descricao, sum (o.valor)\r\n"
+						+ "from categoria c \r\n"
+						+ "inner join operacao o \r\n"
+						+ "on c.id = o.categoria_id \r\n"
+						+ "where date_part('month', o.data) = :monthParam\r\n"
+						+ "and date_part('year', o.data) = :yearParam\r\n"
+						+ "\r\n"
+						+ "group by c.id ");
+
+		nativeQuery.setParameter("monthParam", month);
+		nativeQuery.setParameter("yearParam", year);
+		
+		List<Object[]> result =  nativeQuery.getResultList();
+		
+		List<AmountChart> amounts = result
+				.stream()
+				.map(a ->  new AmountChart((String)a[0], (Double)a[1]) )
+				.collect(Collectors.toList());	
+		
+		return amounts;
+	}
+
 
 }

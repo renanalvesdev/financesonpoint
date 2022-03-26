@@ -48,7 +48,7 @@ public class OperacaoRepositoryImpl implements OperacaoRepositoryCustom{
 			p = cb.and(p, cb.equal(operacaoRoot.get("data"), filter.getCategoria()));
 		}
 
-		criteriaQuery.orderBy(cb.desc(operacaoRoot.get("valor")));
+		criteriaQuery.orderBy(cb.desc(operacaoRoot.get("data")));
 		criteriaQuery.where(p);
 		
 		List<Operacao> despesas = entityManager.createQuery(criteriaQuery).getResultList();

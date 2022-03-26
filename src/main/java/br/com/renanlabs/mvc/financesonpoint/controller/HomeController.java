@@ -87,7 +87,8 @@ public class HomeController {
 		
 		totalDespesas += operacoes.stream().mapToDouble(Operacao::getValor).sum();
 		
-		model.addAttribute("chartData", getChartData(despesaFilter.getMonth(), despesaFilter.getYear()));
+		model.addAttribute("chartAmountCarteiraData", getChartAmountCarteira(despesaFilter.getMonth(), despesaFilter.getYear()));
+		model.addAttribute("chartAmountCategoriaData", getChartAmountCategoria(despesaFilter.getMonth(), despesaFilter.getYear()));
 		model.addAttribute("totalMes", totalDespesas);
 		model.addAttribute("operacoes", operacoes);
 		model.addAttribute("planejamentos", planejamentos);
@@ -95,11 +96,21 @@ public class HomeController {
 		return "home";
 	}
 	
-	private List<List<Object>> getChartData(Integer mes, Integer ano) { 
+	private List<List<Object>> getChartAmountCarteira(Integer mes, Integer ano) { 
 		
         return List.of(
         		chartService
-        		.despesasAmountPorMesAndAno(mes, ano)
+        		.amountCarteiraPorMesAndAno(mes, ano)
+        		.stream()
+        		.map(a -> List.of(a.getDescricao(), a.getTotal()))
+        		.collect(Collectors.toList()));
+    }
+	
+	private List<List<Object>> getChartAmountCategoria(Integer mes, Integer ano) { 
+		
+        return List.of(
+        		chartService
+        		.amountCategoriaPorMesAndAno(mes, ano)
         		.stream()
         		.map(a -> List.of(a.getDescricao(), a.getTotal()))
         		.collect(Collectors.toList()));
