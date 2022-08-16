@@ -17,7 +17,7 @@ public class Carteira {
 	
 	private Double valor = 0.00;
 	
-	@Formula("(SELECT COALESCE(SUM(c.valor_root),2) FROM carteira_transacao c where c.carteira_id = id)")
+	@Formula("(SELECT COALESCE(SUM(c.valor_root),0) FROM carteira_transacao c where c.carteira_id = id)")
 	private Double saldo = 0.00;
 
 	public Long getId() {
