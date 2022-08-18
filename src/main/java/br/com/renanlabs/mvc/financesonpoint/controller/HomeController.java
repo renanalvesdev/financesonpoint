@@ -27,7 +27,7 @@ import br.com.renanlabs.mvc.financesonpoint.service.ChartService;
 import br.com.renanlabs.mvc.financesonpoint.service.PlanejamentoMensalService;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping(value={"/","/home"})
 public class HomeController {
 	
 	@Autowired
