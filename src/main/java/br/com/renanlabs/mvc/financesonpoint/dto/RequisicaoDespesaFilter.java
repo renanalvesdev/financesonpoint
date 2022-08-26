@@ -2,6 +2,8 @@ package br.com.renanlabs.mvc.financesonpoint.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.Pattern;
+
 import br.com.renanlabs.mvc.financesonpoint.filter.DespesaFilter;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Categoria;
@@ -9,6 +11,7 @@ import br.com.renanlabs.mvc.financesonpoint.util.DateUtil;
 
 public class RequisicaoDespesaFilter {
 
+	@Pattern(regexp = "(0[1-9]|10|11|12)/20[0-9]{2}$", message = "O mês deve ter o formato MM/yyyy")
 	private String date;
 
 	private Categoria categoria; 
@@ -26,8 +29,6 @@ public class RequisicaoDespesaFilter {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
-	
 	
 	public Categoria getCategoria() {
 		return categoria;

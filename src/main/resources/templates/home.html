@@ -8,11 +8,21 @@
 	<div class="container">
 		<div th:replace="~{base::titulo('Operações')}"></div>
 		
+	
+	
+	
 		<form action="/home/searchByFilter" method="GET" th:object="${requisicaoDespesaFilter}">
+		<div th:if="${#fields.hasAnyErrors()}">
+	    <ul>
+	        <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+	    </ul>
+	</div>
 			<div class="row" style="margin-bottom: 40px; border: 1px solid; padding-top: 10px; padding-bottom: 20px;">
 				<div class="col">
 					<label>Mês</label>
 					<input type="text" th:field="*{date}" class="form-control" placeholder="Pesquisar por um mes/ano. ex: 05/2022" aria-label="Pesquisar por um mes/ano. ex: 05/2022" aria-describedby="basic-addon2">
+					<div class="invalid-feedback" th:errors="*{date}">
+					</div>
 				</div>
 				<div class="col">
 					<label>Carteira:</label>
@@ -22,6 +32,8 @@
 			                    th:text="${carteira.descricao}"
 			                    th:value="${carteira.id}">
 					</select>
+					<div class="invalid-feedback" th:errors="*{carteira}">
+					</div>
 				</div>
 				<div class="col">
 					<label>Categoria:</label>
@@ -31,6 +43,8 @@
 			                    th:text="${categoria.descricao}"
 			                    th:value="${categoria.id}">
 					</select>
+					<div class="invalid-feedback" th:errors="*{categoria}">
+					</div>
 				</div>
 				<div class="col-12">
 					<button class="btn btn-outline-secondary" type="submit">Pesquisar</button></a>
@@ -117,7 +131,7 @@
 			        </tr>
 			    </thead>
 			    <tbody>
-					<tr th:if="${planejamentos.empty}">
+					<tr th:if="${planejamentos == null or planejamentos.empty}">
 			            <td colspan="2"> Nenhuma operação realizada. </td>
 			        </tr>
 			        <tr  th:each="planejamento : ${planejamentos}">

@@ -68,30 +68,26 @@ public class HomeController {
 	}
 	
 	@GetMapping("/searchByFilter")
-	public String searchByFilter(@Valid RequisicaoDespesaFilter requisicaoDespesaFilter, BindingResult result, Model model) {
+	public String searchByFilter(@Valid RequisicaoDespesaFilter requisicaoDespesaFilter, BindingResult result,  Model model) {
 		
+		if (result.hasErrors()) {
+            return "home";
+        }
+
 		DespesaFilter despesaFilter = requisicaoDespesaFilter.toDespesaFilter();
-		List<Operacao> operacoes = new ArrayList<Operacao>();
-		List<PlanejamentoMensal> planejamentos = new ArrayList<PlanejamentoMensal>();
-		Double totalDespesas = 0.00;
 		
-		try {
-			operacoes = repository.findByFilter(despesaFilter);
-			planejamentos = planejamentoMensalService.findByMonthAndYear(despesaFilter.getMonth(), despesaFilter.getYear());
-			
-		} catch (Exception e) {
-			System.out.println("Houve um erro ao tentar filtrar : [" + e.getMessage() + "] -> trazendo todos os resultados...");
-			operacoes = repository.findAll();
-			planejamentos = planejamentoMensalService.findAll();
-		}
+		List<Operacao> operacoes = repository.findByFilter(despesaFilter);
+		List<PlanejamentoMensal> planejamentos = planejamentoMensalService.findByMonthAndYear(despesaFilter.getMonth(), despesaFilter.getYear());
+		
+		Double totalDespesas = 0.00;
 		
 		totalDespesas += operacoes.stream().mapToDouble(Operacao::getValor).sum();
 		
 		model.addAttribute("chartAmountCarteiraData", getChartAmountCarteira(despesaFilter.getMonth(), despesaFilter.getYear()));
 		model.addAttribute("chartAmountCategoriaData", getChartAmountCategoria(despesaFilter.getMonth(), despesaFilter.getYear()));
-		model.addAttribute("totalMes", totalDespesas);
 		model.addAttribute("operacoes", operacoes);
 		model.addAttribute("planejamentos", planejamentos);
+		model.addAttribute("totalMes", totalDespesas);
 		
 		return "home";
 	}
