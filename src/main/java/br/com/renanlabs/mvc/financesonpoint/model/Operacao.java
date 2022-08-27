@@ -91,8 +91,15 @@ public class Operacao {
 		this.planejamentoMensal = planejamentoMensal;
 	}
 	
+	public Double saldoPlanejamentoMensal() {
+		return planejamentoMensal.getSaldo();
+	}
 	
-	
+	public boolean isNovo() {
+		return id == null;
+	}
 
-
+	public boolean isJaCadastrado() {
+		return !isNovo();
+	}
 }

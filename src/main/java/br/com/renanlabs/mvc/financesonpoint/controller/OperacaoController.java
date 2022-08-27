@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.renanlabs.mvc.financesonpoint.dto.RequisicaoNovaOperacao;
+import br.com.renanlabs.mvc.financesonpoint.exception.FinancesOnPointException;
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.Categoria;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
@@ -100,14 +101,18 @@ public class OperacaoController {
 	
 	//save
 	@PostMapping("save")
-	public String save(@Valid RequisicaoNovaOperacao requisicao, BindingResult result) {
+	public String save(@Valid RequisicaoNovaOperacao requisicao, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
 			return "operacao/formulario";
 		}
 
-		Operacao operacao = requisicao.toOperacao();
-		operacaoService.save(operacao);
+		try {
+			operacaoService.save(requisicao.toOperacao());			
+		} catch (FinancesOnPointException e) {
+			 model.addAttribute("errorMessage",e.getMessage());
+			 return "operacao/formulario";
+		}
 
 		return "redirect:/home";
 	}

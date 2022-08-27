@@ -1,10 +1,14 @@
 package br.com.renanlabs.mvc.financesonpoint.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.renanlabs.mvc.financesonpoint.exception.FinancesOnPointException;
+import br.com.renanlabs.mvc.financesonpoint.exception.NaoPodeAtualizarDespesaExistenteException;
+import br.com.renanlabs.mvc.financesonpoint.exception.ValorDespesaMaiorQueBudgetException;
 import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
 import br.com.renanlabs.mvc.financesonpoint.model.TipoTransacao;
@@ -28,8 +32,12 @@ public class OperacaoService {
 
 	public void save(Operacao operacao) {
 
-		if (operacao.getPlanejamentoMensal() != null && operacao.getValor() > operacao.getPlanejamentoMensal().getSaldo()) {
-			throw new FinancesOnPointException("O valor é maior do que o budget estabelecido para esse planejamento");
+		if(operacao.isJaCadastrado()) {
+			throw new NaoPodeAtualizarDespesaExistenteException();
+		}
+		
+		if (operacao.getPlanejamentoMensal() != null && operacao.getValor() > operacao.saldoPlanejamentoMensal()) {
+			throw new ValorDespesaMaiorQueBudgetException();
 		}
 
 		//salva a despesa

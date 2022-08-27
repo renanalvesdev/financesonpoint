@@ -63,8 +63,11 @@ public class CarteiraTransacaoController {
 	@PostMapping("save")
 	public String save(@Valid RequisicaoCarteiraTransacao requisicao, BindingResult result, Model model) {
 
+		String successRedirect = "redirect:/carteira/listagem";
+		String errorRedirect = "carteiraTransacao/formulario";
+		
 		if (result.hasErrors()) {
-			return "carteiraTransacao/formulario";
+			return errorRedirect;
 		}
 
 		try {
@@ -72,11 +75,11 @@ public class CarteiraTransacaoController {
 			carteiraTransacaoService.save(carteiraTransacao);
 		} catch (FinancesOnPointException e) {
 			 model.addAttribute("errorMessage",e.getMessage());
-			 return "carteiraTransacao/formulario";
+			 return errorRedirect;
 		}
 		
+		return successRedirect;
 
-		return "redirect:/carteira/listagem";
 	}
 
 }
