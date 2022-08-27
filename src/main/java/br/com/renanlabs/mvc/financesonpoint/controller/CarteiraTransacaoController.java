@@ -48,7 +48,7 @@ public class CarteiraTransacaoController {
 	}
 
 	@GetMapping("/formulario/editar/{id}")
-	public String showUpdateForm(@PathVariable("id") long id, Model model) {
+	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		
 		CarteiraTransacao carteiraTransacao = carteiraTransacaoService.findById(id);
 		

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
 import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
+import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
 import br.com.renanlabs.mvc.financesonpoint.repository.CarteiraTransacaoRepository;
 
 @Service
@@ -34,8 +35,13 @@ public class CarteiraTransacaoService {
 		return carteiraTransacaoRepository.findByCarteiraOrderByDataDesc(carteira);
 	}
 	
-	public CarteiraTransacao findById(Long id) {
-		return carteiraTransacaoRepository.findById(id).orElse(null);
+	public CarteiraTransacao findById(Integer id) {
+		return carteiraTransacaoRepository.findById(id).orElseThrow(() -> new RuntimeException("Carteira nao encontrada"));
 	}
+	
+	public CarteiraTransacao findByDespesa(Operacao despesa) {
+		return carteiraTransacaoRepository.findByDespesa(despesa);
+	}
+	
 
 }

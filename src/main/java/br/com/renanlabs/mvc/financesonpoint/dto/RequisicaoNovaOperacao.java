@@ -18,7 +18,7 @@ import br.com.renanlabs.mvc.financesonpoint.model.PlanejamentoMensal;
  */
 public class RequisicaoNovaOperacao {
 
-	private Long id;
+	private Integer id;
 
 	@NotBlank
 	private String descricao;
@@ -70,11 +70,13 @@ public class RequisicaoNovaOperacao {
 		return operacao;
 	}
 
-	public Long getId() {
+
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

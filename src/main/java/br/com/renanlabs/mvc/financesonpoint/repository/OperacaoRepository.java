@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.renanlabs.mvc.financesonpoint.model.Operacao;
 
 @Repository
-public interface OperacaoRepository extends JpaRepository<Operacao, Long>, OperacaoRepositoryCustom {
+public interface OperacaoRepository extends JpaRepository<Operacao, Integer>, OperacaoRepositoryCustom {
 
 	@Query("select o from Operacao o where year(o.data) = :year and  month(o.data) = :month")
 	public List<Operacao> findByMonthAndYear(@Param("month") int month, @Param("year") int year);

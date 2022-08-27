@@ -16,7 +16,7 @@ import javax.persistence.OneToOne;
 public class Operacao {
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Integer id;
 	
 	private String descricao;
 	private Double valor;
@@ -36,14 +36,12 @@ public class Operacao {
 	@OneToOne
 	private PlanejamentoMensal planejamentoMensal;
 
-	
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
 	public boolean isEfetuada() {
 		return efetuada;
 	}

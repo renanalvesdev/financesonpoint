@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,13 +66,12 @@ public class OperacaoController {
 
 	// show fetched Operation form
 	@GetMapping("/formulario/editar/{id}")
-	public String showUpdateForm(@PathVariable("id") long id, Model model) {
+	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
 		
 		List<Carteira> carteiras = carteiraRepository.findAll();
 		List<Categoria> categorias = categoriaService.findAll();
 		
-		Operacao operacao = operacaoRepository.findById(id)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
+		Operacao operacao = operacaoService.buscaPorId(id);
 		
 		List<PlanejamentoMensal> planejamentos = planejamentoMensalService.findByMesDeData(operacao.getData()); 
 
@@ -90,7 +90,7 @@ public class OperacaoController {
 	@GetMapping("despesaModal")
     public String showDespesaModal(@RequestParam("id") String id, Model model) {
 		
-		Operacao operacao = operacaoRepository.findById(Long.parseLong(id)).orElse(null);
+		Operacao operacao = operacaoService.buscaPorId(Integer.valueOf(id));
         model.addAttribute("operacao", operacao);
         return "despesaModal";
     }
@@ -109,6 +109,12 @@ public class OperacaoController {
 		Operacao operacao = requisicao.toOperacao();
 		operacaoService.save(operacao);
 
+		return "redirect:/home";
+	}
+	
+	@GetMapping("/deletar/{id}")
+	public String delete(@PathVariable("id") Long id) {
+		operacaoService.delete(id.intValue());
 		return "redirect:/home";
 	}
 
