@@ -11,7 +11,7 @@ import br.com.renanlabs.mvc.financesonpoint.util.DateUtil;
 
 public class RequisicaoDespesaFilter {
 
-	@Pattern(regexp = "(0[1-9]|10|11|12)/20[0-9]{2}$", message = "O mês deve ter o formato MM/yyyy")
+	@Pattern(regexp = "(0[1-9]|10|11|12)/20[0-9]{2}$", message = "O mês deve ter o formato MM/yyyy. Exemplo: 05/2022")
 	private String date;
 
 	private Categoria categoria; 

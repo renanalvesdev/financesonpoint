@@ -9,12 +9,10 @@
 		<div th:replace="~{base::titulo('Operações')}"></div>
 		
 	
-	
-	
-		<form action="/home/searchByFilter" method="GET" th:object="${requisicaoDespesaFilter}">
+	<form action="/home/searchByFilter" method="GET" th:object="${requisicaoDespesaFilter}">
 		<div th:if="${#fields.hasAnyErrors()}">
 	    <ul>
-	        <li th:each="err : ${#fields.allErrors()}" th:text="${err}" />
+	        <li th:each="err : ${#fields.allErrors()}" th:text="${err}" th:class="error" />
 	    </ul>
 	</div>
 			<div class="row" style="margin-bottom: 40px; border: 1px solid; padding-top: 10px; padding-bottom: 20px;">
