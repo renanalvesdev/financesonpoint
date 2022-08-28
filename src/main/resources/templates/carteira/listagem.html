@@ -7,6 +7,14 @@
 	<div th:replace="~{base :: logo}" />
 	<div class="container">
 		<div th:replace="~{base::titulo('Carteiras')}"></div>
+		
+		<nav class="navbar navbar-expand navbar-light bg-light d-flex justify-content-between mb-3">
+			<div class="navbar-nav">
+				<a th:classappend="${status} == null ?  'active' " class="nav-item nav-link" href="/carteira/listagem">Todos</a>
+				<a th:classappend="${status} == 'ativo' ?  'active' " class="nav-item nav-link" href="/carteira/ativos">Ativos</a>
+			</div>
+			<a href="/pedido/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
+		</nav>
 
 		<a href="/carteira/formulario"><button class="btn btn-outline-secondary my-2 my-sm-0">Novo</button></a>
 		

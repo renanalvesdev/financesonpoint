@@ -33,6 +33,15 @@ public class CarteiraController {
 	public String listagem(Model model) {
 		List<Carteira> carteiras = carteiraRepository.findAll();
 		model.addAttribute("carteiras", carteiras);
+		model.addAttribute("status", null);
+		return "carteira/listagem"; 
+	}
+	
+	@GetMapping("/ativos")
+	public String ativos( Model model) {
+		List<Carteira> carteiras = carteiraRepository.findByAtivo(true);
+		model.addAttribute("carteiras", carteiras);
+		model.addAttribute("status", "Ativo".toLowerCase());
 		return "carteira/listagem"; 
 	}
 	
