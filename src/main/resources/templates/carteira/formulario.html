@@ -58,7 +58,7 @@
 				        </tr>
 				        <tr  th:each="transacao : ${transacoesCarteira}">
 				            <td><span  th:class="|tipo-badge status-${transacao.tipo.name().toLowerCase()}|" th:text="${transacao.tipo}"> Tipo </span></td>
-				            <td><span th:style="${transacao.valorRoot < 0 ? 'color:red' : 'color:green'} " th:text="${ 'R$ ' + transacao.valorRoot}"></span></td>
+				            <td><span th:style="${!transacao.valorRootPositivo ? 'color:red' : 'color:green'} " th:text="${ 'R$ ' + transacao.valorRoot}"></span></td>
 				            <td><span th:text="${#temporals.format(transacao.data, 'dd/MM/yyyy')}"> Data </span></td>
 				            <td style="text-align: center;">
 				            	<button

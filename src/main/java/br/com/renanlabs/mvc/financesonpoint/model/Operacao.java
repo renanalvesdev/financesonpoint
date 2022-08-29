@@ -1,5 +1,6 @@
 package br.com.renanlabs.mvc.financesonpoint.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -19,7 +20,7 @@ public class Operacao {
 	private Integer id;
 	
 	private String descricao;
-	private Double valor;
+	private BigDecimal valor;
 	private LocalDate data;
 	
 	@Enumerated(EnumType.STRING)
@@ -54,10 +55,11 @@ public class Operacao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Double getValor() {
+	
+	public BigDecimal getValor() {
 		return valor;
 	}
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 	public LocalDate getData() {
@@ -91,7 +93,7 @@ public class Operacao {
 		this.planejamentoMensal = planejamentoMensal;
 	}
 	
-	public Double saldoPlanejamentoMensal() {
+	public BigDecimal saldoPlanejamentoMensal() {
 		return planejamentoMensal.getSaldo();
 	}
 	
@@ -101,5 +103,9 @@ public class Operacao {
 
 	public boolean isJaCadastrado() {
 		return !isNovo();
+	}
+	
+	public boolean isOperacaoSuperaPlanejamentoMensal() {
+		return planejamentoMensal != null && valor.compareTo(saldoPlanejamentoMensal()) > 0;
 	}
 }

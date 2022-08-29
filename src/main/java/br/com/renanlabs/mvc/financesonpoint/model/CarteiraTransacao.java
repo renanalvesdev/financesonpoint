@@ -1,5 +1,6 @@
 package br.com.renanlabs.mvc.financesonpoint.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -21,9 +22,9 @@ public class CarteiraTransacao {
 	
 	private String descricao;
 	
-	private Double valor;
+	private BigDecimal valor;
 	
-	private Double valorRoot;
+	private BigDecimal valorRoot;
 	
 	private LocalDate data;
 	
@@ -59,7 +60,7 @@ public class CarteiraTransacao {
 		this.data = LocalDate.now();
 	}
 	
-	public CarteiraTransacao(Carteira carteira, TipoTransacao tipo, Double valor, Carteira origem) {
+	public CarteiraTransacao(Carteira carteira, TipoTransacao tipo, BigDecimal valor, Carteira origem) {
 		this.carteira = carteira;
 		this.tipo = tipo;
 		this.valor = valor;
@@ -87,12 +88,23 @@ public class CarteiraTransacao {
 		this.descricao = descricao;
 	}
 
-	public Double getValor() {
+
+
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
+	}
+	
+
+	public BigDecimal getValorRoot() {
+		return valorRoot;
+	}
+
+	public void setValorRoot(BigDecimal valorRoot) {
+		this.valorRoot = valorRoot;
 	}
 
 	public LocalDate getData() {
@@ -143,16 +155,8 @@ public class CarteiraTransacao {
 		this.tipo = tipo;
 	}
 
-	public Double getValorRoot() {
-		return valorRoot;
+	public boolean isValorRootPositivo() {
+		return valorRoot.signum() > 0;
 	}
-
-	public void setValorRoot(Double valorRoot) {
-		this.valorRoot = valorRoot;
-	}
-	
-	
-	
-	
 
 }

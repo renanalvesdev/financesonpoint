@@ -1,5 +1,6 @@
 package br.com.renanlabs.mvc.financesonpoint.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.validation.constraints.NotBlank;
@@ -24,7 +25,7 @@ public class RequisicaoNovaOperacao {
 	private String descricao;
 
 	@NotNull
-	private Double valor;
+	private BigDecimal valor;
 	
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
@@ -96,11 +97,11 @@ public class RequisicaoNovaOperacao {
 		this.descricao = descricao;
 	}
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 

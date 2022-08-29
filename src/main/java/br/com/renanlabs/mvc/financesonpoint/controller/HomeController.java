@@ -1,5 +1,6 @@
 package br.com.renanlabs.mvc.financesonpoint.controller;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,9 +80,9 @@ public class HomeController {
 		List<Operacao> operacoes = repository.findByFilter(despesaFilter);
 		List<PlanejamentoMensal> planejamentos = planejamentoMensalService.findByMonthAndYear(despesaFilter.getMonth(), despesaFilter.getYear());
 		
-		Double totalDespesas = 0.00;
+		BigDecimal totalDespesas = BigDecimal.ZERO;
 		
-		totalDespesas += operacoes.stream().mapToDouble(Operacao::getValor).sum();
+		totalDespesas = totalDespesas.add(operacoes.stream().map(Operacao::getValor).reduce(BigDecimal.ZERO, BigDecimal::add));
 		
 		model.addAttribute("chartAmountCarteiraData", getChartAmountCarteira(despesaFilter.getMonth(), despesaFilter.getYear()));
 		model.addAttribute("chartAmountCategoriaData", getChartAmountCategoria(despesaFilter.getMonth(), despesaFilter.getYear()));

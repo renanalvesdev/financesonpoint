@@ -56,7 +56,7 @@ public class OperacaoController {
 
 		List<Carteira> carteiras = carteiraRepository.findAll();
 		List<Categoria> categorias = categoriaService.findAll();
-		List<PlanejamentoMensal> planejamentos = planejamentoMensalService.findByMesAtual(); 
+		List<PlanejamentoMensal> planejamentos = planejamentoMensalService.findAll(); 
 		
 		model.addAttribute("categorias", categorias);
 		model.addAttribute("carteiras", carteiras);

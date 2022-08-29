@@ -1,5 +1,7 @@
 package br.com.renanlabs.mvc.financesonpoint.dto;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.NotBlank;
 
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
@@ -11,9 +13,9 @@ public class RequisicaoNovaCarteira {
 	@NotBlank
 	private String descricao;
 	
-	private Double valor =  0.00;
+	private BigDecimal valor =  BigDecimal.ZERO;
 	
-	private Double saldo =  0.00;
+	private BigDecimal saldo =  BigDecimal.ZERO;
 	
 	
 	public RequisicaoNovaCarteira() {
@@ -52,21 +54,22 @@ public class RequisicaoNovaCarteira {
 		this.descricao = descricao;
 	}
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 
-	public Double getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Double saldo) {
+	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
+
 
 	
 

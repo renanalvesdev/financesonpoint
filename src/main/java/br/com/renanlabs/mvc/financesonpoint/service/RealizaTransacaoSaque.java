@@ -30,11 +30,11 @@ public class RealizaTransacaoSaque implements RealizadorTransacao{
 		
 		//atualiza carteira
 		Carteira carteira = carteiraTransacao.getCarteira();
-		carteira.setValor(carteira.getValor() - carteiraTransacao.getValor());
+		carteira.setValor(carteira.getValor().subtract(carteiraTransacao.getValor()));
 		carteiraRepository.save(carteira);
 
 		//salva transacao
-		carteiraTransacao.setValorRoot((-1)*carteiraTransacao.getValor());
+		carteiraTransacao.setValorRoot(carteiraTransacao.getValor().negate());
 		carteiraTransacao.setData(LocalDate.now());
 		carteiraTransacaoRepository.save(carteiraTransacao);
 		

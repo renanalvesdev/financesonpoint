@@ -1,12 +1,9 @@
 package br.com.renanlabs.mvc.financesonpoint.service;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.renanlabs.mvc.financesonpoint.exception.FinancesOnPointException;
 import br.com.renanlabs.mvc.financesonpoint.exception.NaoPodeAtualizarDespesaExistenteException;
 import br.com.renanlabs.mvc.financesonpoint.exception.ValorDespesaMaiorQueBudgetException;
 import br.com.renanlabs.mvc.financesonpoint.model.CarteiraTransacao;
@@ -36,7 +33,7 @@ public class OperacaoService {
 			throw new NaoPodeAtualizarDespesaExistenteException();
 		}
 		
-		if (operacao.getPlanejamentoMensal() != null && operacao.getValor() > operacao.saldoPlanejamentoMensal()) {
+		if (operacao.isOperacaoSuperaPlanejamentoMensal()) {
 			throw new ValorDespesaMaiorQueBudgetException();
 		}
 

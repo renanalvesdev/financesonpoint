@@ -1,5 +1,7 @@
 package br.com.renanlabs.mvc.financesonpoint.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,10 +17,10 @@ public class Carteira {
 	
 	private String descricao;
 	
-	private Double valor = 0.00;
+	private BigDecimal valor = BigDecimal.ZERO;
 	
 	@Formula("(SELECT COALESCE(SUM(c.valor_root),0) FROM carteira_transacao c where c.carteira_id = id)")
-	private Double saldo = 0.00;
+	private BigDecimal saldo = BigDecimal.ZERO;
 	
 	private Boolean ativo = true;
 
@@ -37,26 +39,23 @@ public class Carteira {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-	
-	
-	
-	public Double getSaldo() {
+
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Double saldo) {
+	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
-	
-	
 
 	public Boolean getAtivo() {
 		return ativo;

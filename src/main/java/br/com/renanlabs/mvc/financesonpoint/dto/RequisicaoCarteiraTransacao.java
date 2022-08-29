@@ -1,5 +1,7 @@
 package br.com.renanlabs.mvc.financesonpoint.dto;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.NotBlank;
 
 import br.com.renanlabs.mvc.financesonpoint.model.Carteira;
@@ -13,7 +15,7 @@ public class RequisicaoCarteiraTransacao {
 	@NotBlank
 	private String descricao;
 	
-	private Double valor;
+	private BigDecimal valor;
 	
 	private TipoTransacao tipo;	
 	
@@ -63,11 +65,11 @@ public class RequisicaoCarteiraTransacao {
 		this.descricao = descricao;
 	}
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 

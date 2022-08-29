@@ -1,5 +1,7 @@
 package br.com.renanlabs.mvc.financesonpoint.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,12 +16,13 @@ public class PlanejamentoMensal {
 	private Long id;
 	
 	private String descricao;
-	private Double valor;
+	
+	private BigDecimal valor;
+	
+	private BigDecimal saldo;
 	
 	@Formula("(SELECT COALESCE(SUM(o.valor),0) FROM Operacao o where o.planejamento_mensal_id = id)")
-	private Double gasto = 0.00;
-	
-	private Double saldo ;
+	private BigDecimal gasto = BigDecimal.ZERO;
 	
 	private Integer mes;
 	private Integer ano;
@@ -37,24 +40,24 @@ public class PlanejamentoMensal {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	public Double getValor() {
+	
+	public BigDecimal getValor() {
 		return valor;
 	}
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-	
-	public Double getGasto() {
+	public BigDecimal getSaldo() {
+		return valor.subtract(gasto);
+	}
+	public void setSaldo(BigDecimal saldo) {
+		this.saldo = saldo;
+	}
+	public BigDecimal getGasto() {
 		return gasto;
 	}
-	public void setGasto(Double gasto) {
+	public void setGasto(BigDecimal gasto) {
 		this.gasto = gasto;
-	}
-	public Double getSaldo() {
-		return valor - gasto;
-	}
-	public void setSaldo(Double saldo) {
-		this.saldo = saldo;
 	}
 	public Integer getMes() {
 		return mes;

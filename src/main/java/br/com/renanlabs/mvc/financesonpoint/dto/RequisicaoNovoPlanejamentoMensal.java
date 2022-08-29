@@ -1,5 +1,7 @@
 package br.com.renanlabs.mvc.financesonpoint.dto;
 
+import java.math.BigDecimal;
+
 import br.com.renanlabs.mvc.financesonpoint.model.PlanejamentoMensal;
 
 public class RequisicaoNovoPlanejamentoMensal {
@@ -7,8 +9,8 @@ public class RequisicaoNovoPlanejamentoMensal {
 	private Long id;
 
 	private String descricao;
-	private Double valor;
-	private Double saldo;
+	private BigDecimal valor;
+	private BigDecimal saldo;
 	private String mesAno;
 
 	public RequisicaoNovoPlanejamentoMensal() {
@@ -50,19 +52,19 @@ public class RequisicaoNovoPlanejamentoMensal {
 		this.descricao = descricao;
 	}
 
-	public Double getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 
-	public void setValor(Double valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 
-	public Double getSaldo() {
+	public BigDecimal getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Double saldo) {
+	public void setSaldo(BigDecimal saldo) {
 		this.saldo = saldo;
 	}
 
